@@ -45,7 +45,7 @@ namespace MegaDesk_Alex_Shnyrov
             {
                 quotes.Add(quoteForm.quote);
             }
-            
+
         }
 
         private void MainMenu_MouseDown(object sender, MouseEventArgs e)
@@ -70,7 +70,7 @@ namespace MegaDesk_Alex_Shnyrov
         private void save()
         {
             string json = JsonConvert.SerializeObject(quotes);
-            System.IO.File.WriteAllText("WriteText.txt", json);
+            System.IO.File.WriteAllText(QUOTES_PATH, json);
         }
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -95,5 +95,5 @@ namespace MegaDesk_Alex_Shnyrov
                 quotes = new List<DeskQuote>();
             }
         }
-
+    }
 }

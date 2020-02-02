@@ -58,7 +58,7 @@ namespace MegaDesk_Alex_Shnyrov
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new ViewAllQuotes().ShowDialog();
+            new ViewAllQuotes(quotes).ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)

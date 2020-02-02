@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace MegaDesk_Alex_Shnyrov
 {
@@ -66,6 +67,22 @@ namespace MegaDesk_Alex_Shnyrov
             new SearchQuotes().ShowDialog();
         }
 
+        private void save()
+        {
+            string json = JsonConvert.SerializeObject(quotes);
+            System.IO.File.WriteAllText("WriteText.txt", json);
+        }
+
+        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            save();
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            load();
+        }
+
         private void load()
         {
             if (File.Exists(QUOTES_PATH))
@@ -79,9 +96,4 @@ namespace MegaDesk_Alex_Shnyrov
             }
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-            load();
-        }
-    }
 }

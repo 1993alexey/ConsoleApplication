@@ -41,14 +41,14 @@
             this.grdQuotes.Name = "grdQuotes";
             this.grdQuotes.ReadOnly = true;
             this.grdQuotes.RowTemplate.Height = 24;
-            this.grdQuotes.Size = new System.Drawing.Size(1118, 426);
+            this.grdQuotes.Size = new System.Drawing.Size(1242, 426);
             this.grdQuotes.TabIndex = 0;
             // 
             // ViewAllQuotes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 450);
+            this.ClientSize = new System.Drawing.Size(1258, 450);
             this.Controls.Add(this.grdQuotes);
             this.Name = "ViewAllQuotes";
             this.Text = "ViewAllQuotes";

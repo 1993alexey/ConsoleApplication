@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,8 @@ namespace MegaDesk_Alex_Shnyrov
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        List<DeskQuote> quotes = new List<DeskQuote>();
+        List<DeskQuote> quotes;
+        private const string QUOTES_PATH = "quotes.txt";
 
         public MainMenu()
         {
@@ -61,6 +64,24 @@ namespace MegaDesk_Alex_Shnyrov
         private void button4_Click(object sender, EventArgs e)
         {
             new SearchQuotes().ShowDialog();
+        }
+
+        private void load()
+        {
+            if (File.Exists(QUOTES_PATH))
+            {
+                string quotesStr = File.ReadAllText(QUOTES_PATH);
+                quotes = JsonConvert.DeserializeObject<List<DeskQuote>>(quotesStr);
+            }
+            else
+            {
+                quotes = new List<DeskQuote>();
+            }
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            load();
         }
     }
 }

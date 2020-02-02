@@ -23,7 +23,7 @@ namespace MegaDesk_Alex_Shnyrov
         {
             double size = GetSize();
             double basePrice = 200;
-            double surfacePrice = size > 1000 ? size : 0;
+            double surfacePrice = size > 1000 ? size - 1000 : 0;
             double drawersPrice = Drawers * 50;
             double materialPrice = 0;
 

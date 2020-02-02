@@ -12,6 +12,7 @@ namespace MegaDesk_Alex_Shnyrov
         public Desk Desk { get; set; }
         public int Rush { get; set; }
         public DateTime Date { get; private set; }
+        public string Name { get; set; }
         private static int[,] RushPrices = new int[3, 3];
         private static readonly string filePath = "rush-prices.txt";
 

@@ -12,9 +12,18 @@ namespace MegaDesk_Alex_Shnyrov
 {
     public partial class DisplayQuote : Form
     {
-        public DisplayQuote()
+        private List<DeskQuote> _quotes;
+        public DisplayQuote(List<DeskQuote> quotes)
         {
             InitializeComponent();
+            _quotes = quotes;
+        }
+
+        private void populateGrid()
+        {
+            grdQuotes.Columns.Add(new DataGridViewColumn());
+            grdQuotes.Columns.Add(new DataGridViewColumn());
+            grdQuotes.Columns.Add(new DataGridViewColumn());
         }
     }
 }

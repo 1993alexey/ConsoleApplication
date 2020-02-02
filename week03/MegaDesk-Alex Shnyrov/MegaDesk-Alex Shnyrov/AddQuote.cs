@@ -103,6 +103,7 @@ namespace MegaDesk_Alex_Shnyrov
 
         private void name_KeyUp(object sender, KeyEventArgs e)
         {
+            quote.Name = ((TextBox)sender).Text;
             validate();
         }
 

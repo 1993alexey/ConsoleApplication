@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MegaDesk_Alex_Shnyrov
 {
@@ -16,5 +17,25 @@ namespace MegaDesk_Alex_Shnyrov
         {
             InitializeComponent();
         }
+
+        DataTable table = new DataTable();
+
+        private void SearchQuotes_Load(object sender, EventArgs e)
+        {
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Material", typeof(string));
+            table.Columns.Add("Width", typeof(int));
+            table.Columns.Add("Depth", typeof(int));
+            table.Columns.Add("Drawers", typeof(int));
+            table.Columns.Add("Rush Order", typeof(int));
+            table.Columns.Add("Quote", typeof(int));
+
+            dataGridView1.DataSource = table;
+
+
+        }
+
+
+
     }
 }

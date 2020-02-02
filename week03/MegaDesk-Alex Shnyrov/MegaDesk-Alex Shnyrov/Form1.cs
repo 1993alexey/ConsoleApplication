@@ -45,7 +45,7 @@ namespace MegaDesk_Alex_Shnyrov
             {
                 quotes.Add(quoteForm.quote);
             }
-            
+
         }
 
         private void MainMenu_MouseDown(object sender, MouseEventArgs e)
@@ -95,5 +95,6 @@ namespace MegaDesk_Alex_Shnyrov
                 quotes = new List<DeskQuote>();
             }
         }
+    }
 
 }

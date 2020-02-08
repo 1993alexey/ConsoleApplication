@@ -13,29 +13,104 @@ namespace MegaDesk_Alex_Shnyrov
 {
     public partial class SearchQuotes : Form
     {
-        public SearchQuotes()
+
+        private List<DeskQuote> _quotes;
+
+        Desk desk = new Desk();
+        DataTable table = new DataTable();
+        List<DeskQuote> _displayQuotes;
+
+        public SearchQuotes(List<DeskQuote> quotes)
         {
             InitializeComponent();
+            _quotes = quotes;
+            _displayQuotes = _quotes;
+            populateGrid();
+            loadMaterialTypes();
+        }
+               
+        private void populateGrid()
+        {
+            grdQuotes.Columns.Add("name", "Name");
+            grdQuotes.Columns.Add("price", "Price");
+            grdQuotes.Columns.Add("type", "Wood Type");
+            grdQuotes.Columns.Add("width", "Width");
+            grdQuotes.Columns.Add("depth", "Depth");
+            grdQuotes.Columns.Add("size", "Size");
+            grdQuotes.Columns.Add("drawers", "Drawers");
+            grdQuotes.Columns.Add("rush", "Rush");
+            grdQuotes.Columns.Add("date", "Date");
+
+            //foreach (var quote in _displayQuotes)
+            //{
+            //    grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, quote.Date.ToString("dd MMM yyyy"));
+            //}
+            populateRows();
+
         }
 
-        DataTable table = new DataTable();
+        private void loadMaterialTypes()
+        {
+            var types = Desk.GetMaterialTypes();
+            foreach (var type in types)
+            {
+                materialType.Items.Add(type);
+            }
+        }
+
+        private void materialType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedType = materialType.SelectedItem.ToString().ToUpper();
+            //var enumStatusList = StatusList.Select(x => Enum.Parse(typeof(ItemStatus), x)).Cast().ToList();
+
+            _displayQuotes = _quotes.Where(quote => quote.Desk.Material.ToString().Equals(selectedType)).ToList();
+            if (_displayQuotes.Count == 0)
+                _displayQuotes = _quotes;
+
+            grdQuotes.Rows.Clear();
+            populateRows();
+
+
+            //if (materialType.SelectedIndex < 1)
+            //{
+            //    grdQuotes.Rows.Clear();
+            //    populateGrid();
+            //    return;
+            //} else
+            //    Console.WriteLine("the material type is " + materialType);
+            //{
+
+               
+            //}
+        }
 
         private void SearchQuotes_Load(object sender, EventArgs e)
         {
-            table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("Material", typeof(string));
-            table.Columns.Add("Width", typeof(int));
-            table.Columns.Add("Depth", typeof(int));
-            table.Columns.Add("Drawers", typeof(int));
-            table.Columns.Add("Rush Order", typeof(int));
-            table.Columns.Add("Quote", typeof(int));
-
-            dataGridView1.DataSource = table;
-
-
+            materialType.SelectedIndex = 0;
         }
 
+        private void populateRows()
+        {
+            //foreach (var quote in _quotes)
+            //{
+            //    grdQuotes.Rows.Clear();
+            //    grdQuotes.Rows.Add(quote.Name,
+            //                       quote.GetPrice(),
+            //                       quote.Desk.Material,
+            //                       quote.Desk.Width,
+            //                       quote.Desk.Depth,
+            //                       quote.Desk.GetSize(),
+            //                       quote.Desk.Drawers,
+            //                       quote.Rush,
+            //                       quote.Date.ToString("dd MMM yyyy"));
+            //}
 
 
+
+            foreach (var quote in _displayQuotes)
+            {
+                grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, quote.Date);
+            }
+        }
     }
 }

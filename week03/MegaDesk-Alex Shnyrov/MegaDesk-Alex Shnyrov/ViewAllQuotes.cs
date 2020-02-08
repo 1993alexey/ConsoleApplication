@@ -27,7 +27,7 @@ namespace MegaDesk_Alex_Shnyrov
 
             foreach(var quote in _quotes)
             {
-                grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, quote.Date.ToString("dd MMM yyyy"));
+                grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, quote.Date);
             }
 
         }

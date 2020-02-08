@@ -25,6 +25,10 @@ namespace MegaDesk_Alex_Shnyrov
 
         List<DeskQuote> quotes;
         private const string QUOTES_PATH = "quotes.txt";
+        private JsonSerializerSettings deserializerSettings = new JsonSerializerSettings()
+        {
+            DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+        };
 
         public MainMenu()
         {
@@ -64,7 +68,7 @@ namespace MegaDesk_Alex_Shnyrov
 
         private void button4_Click(object sender, EventArgs e)
         {
-            new SearchQuotes().ShowDialog();
+            new SearchQuotes(quotes).ShowDialog();
         }
 
         private void save()
@@ -85,10 +89,12 @@ namespace MegaDesk_Alex_Shnyrov
 
         private void load()
         {
+
+
             if (File.Exists(QUOTES_PATH))
             {
                 string quotesStr = File.ReadAllText(QUOTES_PATH);
-                quotes = JsonConvert.DeserializeObject<List<DeskQuote>>(quotesStr);
+                quotes = JsonConvert.DeserializeObject<List<DeskQuote>>(quotesStr, deserializerSettings);
             }
             else
             {

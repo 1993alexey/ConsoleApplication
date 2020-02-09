@@ -41,10 +41,6 @@ namespace MegaDesk_Alex_Shnyrov
             grdQuotes.Columns.Add("rush", "Rush");
             grdQuotes.Columns.Add("date", "Date");
 
-            //foreach (var quote in _displayQuotes)
-            //{
-            //    grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, quote.Date.ToString("dd MMM yyyy"));
-            //}
             populateRows();
 
         }
@@ -61,27 +57,14 @@ namespace MegaDesk_Alex_Shnyrov
         private void materialType_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedType = materialType.SelectedItem.ToString().ToUpper();
-            //var enumStatusList = StatusList.Select(x => Enum.Parse(typeof(ItemStatus), x)).Cast().ToList();
 
             _displayQuotes = _quotes.Where(quote => quote.Desk.Material.ToString().Equals(selectedType)).ToList();
-            if (_displayQuotes.Count == 0)
+            if (materialType.SelectedIndex == 0)
                 _displayQuotes = _quotes;
 
             grdQuotes.Rows.Clear();
             populateRows();
 
-
-            //if (materialType.SelectedIndex < 1)
-            //{
-            //    grdQuotes.Rows.Clear();
-            //    populateGrid();
-            //    return;
-            //} else
-            //    Console.WriteLine("the material type is " + materialType);
-            //{
-
-               
-            //}
         }
 
         private void SearchQuotes_Load(object sender, EventArgs e)
@@ -91,25 +74,9 @@ namespace MegaDesk_Alex_Shnyrov
 
         private void populateRows()
         {
-            //foreach (var quote in _quotes)
-            //{
-            //    grdQuotes.Rows.Clear();
-            //    grdQuotes.Rows.Add(quote.Name,
-            //                       quote.GetPrice(),
-            //                       quote.Desk.Material,
-            //                       quote.Desk.Width,
-            //                       quote.Desk.Depth,
-            //                       quote.Desk.GetSize(),
-            //                       quote.Desk.Drawers,
-            //                       quote.Rush,
-            //                       quote.Date.ToString("dd MMM yyyy"));
-            //}
-
-
-
             foreach (var quote in _displayQuotes)
             {
-                grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, quote.Date);
+                grdQuotes.Rows.Add(quote.Name, quote.GetPrice(), quote.Desk.Material, quote.Desk.Width, quote.Desk.Depth, quote.Desk.GetSize(), quote.Desk.Drawers, quote.Rush, (DateTime)quote.Date);
             }
         }
     }

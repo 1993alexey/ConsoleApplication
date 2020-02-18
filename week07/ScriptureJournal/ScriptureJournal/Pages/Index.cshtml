@@ -1,0 +1,119 @@
+@page
+@model ScriptureJournal.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script>
+        function submitForm() {
+            document.getElementById('filters').submit()
+        }
+
+        document.getElementById('sort-by').addEventListener('change', submitForm)
+
+        const checks = document.getElementsByClassName('form-check-input')
+        for (let check of checks) 
+            check.addEventListener('change', submitForm)
+
+
+    </script>
+
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form id="filters">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-inline my-2 my-lg-0 search-block">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" asp-for="SearchString" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" value="book" class="form-check-input" name="SearchType" asp-for="SearchType" checked>By Book
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" value="word" class="form-check-input" name="SearchType" asp-for="SearchType">By Keyword
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="float-right">
+                <div class="form-group">
+                    <select class="form-control" id="sort-by" asp-for="SortBy">
+                        <option value="book">Sort by book</option>
+                        <option value="date">Sort by date</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JournalModel[0].Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JournalModel[0].Chapter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JournalModel[0].Verse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JournalModel[0].Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JournalModel[0].CreatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.JournalModel)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chapter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Verse)
+                </td>
+                <td class="cursive">
+                    @{
+                        if (item.Notes != null && item.Notes.Length > 50)
+                        {
+                            @item.Notes.Substring(0, 50)
+                            <span>...</span>
+                        }
+                        else
+                        {
+                            @item.Notes;
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

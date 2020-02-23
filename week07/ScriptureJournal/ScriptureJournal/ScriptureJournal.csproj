@@ -33,6 +33,5 @@
     <Content Remove="Details.cshtml" />
     <Content Remove="Delete.cshtml" />
     <Content Remove="Index.cshtml" />
-    <Content Remove="Pages\Index.cshtml" />
   </ItemGroup>
 </Project>

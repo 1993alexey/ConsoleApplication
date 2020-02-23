@@ -1,0 +1,77 @@
+@page
+@model MegaDesk_3._0.Pages.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>QuoteModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Width)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Width)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Depth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Depth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Drawers)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Drawers)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Rush)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Rush)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Size)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuoteModel.MaterialType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuoteModel.MaterialType)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="QuoteModel.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

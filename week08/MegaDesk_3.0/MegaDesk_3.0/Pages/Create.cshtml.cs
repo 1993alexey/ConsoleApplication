@@ -19,14 +19,14 @@ namespace MegaDesk_3._0.Pages
         }
 
         [BindProperty]
-        public QuoteModel QuoteModel { get; set; }
+        public QuoteModel Model { get; set; }
         public SelectList MaterialTypes {get; set;}
 
 
 
         public IActionResult OnGet()
         {
-            MaterialTypes = new SelectList(QuoteModel.MaterialTypes);
+            MaterialTypes = new SelectList(QuoteModel.GetMaterialTypes());
             return Page();
         }
 
@@ -43,7 +43,7 @@ namespace MegaDesk_3._0.Pages
 
             //QuoteModel.Date = DateTime.Now;
 
-            _context.QuoteModel.Add(QuoteModel);
+            _context.QuoteModel.Add(Model);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

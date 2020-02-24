@@ -39,9 +39,12 @@ namespace MegaDesk_3._0.Pages
                 return Page();
             }
 
-            
+            //Model.Date = DateTime.Now;
+            Model.Date = Model.SetTimestamp();
 
-            //QuoteModel.Date = DateTime.Now;
+            Model.Size = Model.GetSize();
+
+            //Model.Price = Model.GetPrice;
 
             _context.QuoteModel.Add(Model);
             await _context.SaveChangesAsync();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace MegaDesk_3._0.Models
@@ -13,13 +14,13 @@ namespace MegaDesk_3._0.Models
         public int Drawers { get; set; }
         public int Rush { get; set; }
 
-        [BindProperty]
+        //[NotMapped]
         public decimal Price { get; set; }
 
-        [BindProperty]
+        //[NotMapped]
         public int Size { get; set; }
 
-        [BindProperty]
+        //[NotMapped]
         public DateTime Date { get; set; }
         public string Name { get; set; }
         public DesktopMaterial MaterialType { get; set; }
@@ -42,7 +43,7 @@ namespace MegaDesk_3._0.Models
             return Size;
         }
 
-        public double GetPrice()
+        public decimal GetPrice()
         {
             double size = GetSize();
             double basePrice = 200;
@@ -69,7 +70,8 @@ namespace MegaDesk_3._0.Models
             //        break;
             //}
 
-            return basePrice + surfacePrice + drawersPrice + materialPrice;
+            //return basePrice + surfacePrice + drawersPrice + materialPrice;
+            return Convert.ToDecimal(basePrice);
         }
 
         public static List<string> GetMaterialTypes()

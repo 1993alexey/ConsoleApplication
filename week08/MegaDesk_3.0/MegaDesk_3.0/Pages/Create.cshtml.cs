@@ -18,13 +18,17 @@ namespace MegaDesk_3._0.Pages
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
         public QuoteModel QuoteModel { get; set; }
+        public SelectList MaterialTypes {get; set;}
+
+
+
+        public IActionResult OnGet()
+        {
+            MaterialTypes = new SelectList(QuoteModel.MaterialTypes);
+            return Page();
+        }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -34,6 +38,10 @@ namespace MegaDesk_3._0.Pages
             {
                 return Page();
             }
+
+            
+
+            //QuoteModel.Date = DateTime.Now;
 
             _context.QuoteModel.Add(QuoteModel);
             await _context.SaveChangesAsync();

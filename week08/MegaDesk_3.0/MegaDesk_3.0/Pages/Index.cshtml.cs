@@ -16,6 +16,7 @@ namespace MegaDesk_3._0.Pages
         public IndexModel(QuoteContext context)
         {
             _context = context;
+            Models.QuoteModel.LoadRushPrices();
         }
 
         public IList<QuoteModel> QuoteModel { get;set; }

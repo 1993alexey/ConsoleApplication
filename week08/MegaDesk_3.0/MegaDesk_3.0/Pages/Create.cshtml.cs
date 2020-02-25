@@ -39,14 +39,14 @@ namespace MegaDesk_3._0.Pages
                 return Page();
             }
 
-            ModelQuote.SetTimestamp();
-            ModelQuote.GetSize();
-            ModelQuote.Price = ModelQuote.GetPrice();
+            ModelQuote.Date = DateTime.Now;
+            ModelQuote.SetSize();
+            ModelQuote.Price = ModelQuote.SetPrice();
 
             _context.QuoteModel.Add(ModelQuote);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new { id = ModelQuote.ID });
         }
     }
 }

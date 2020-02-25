@@ -15,6 +15,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.QuoteModel[0].Name)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.QuoteModel[0].Width)
             </th>
             <th>
@@ -33,13 +36,10 @@
                 @Html.DisplayNameFor(model => model.QuoteModel[0].Size)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QuoteModel[0].Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuoteModel[0].Name)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.QuoteModel[0].MaterialType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuoteModel[0].Date)
             </th>
             <th></th>
         </tr>
@@ -47,6 +47,9 @@
     <tbody>
 @foreach (var item in Model.QuoteModel) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Width)
             </td>
@@ -66,13 +69,10 @@
                 @Html.DisplayFor(modelItem => item.Size)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.MaterialType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |

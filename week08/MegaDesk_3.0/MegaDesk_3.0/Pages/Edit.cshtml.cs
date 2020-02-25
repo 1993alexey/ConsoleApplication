@@ -21,6 +21,7 @@ namespace MegaDesk_3._0.Pages
 
         [BindProperty]
         public QuoteModel QuoteModel { get; set; }
+        public SelectList Materials { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,6 +36,8 @@ namespace MegaDesk_3._0.Pages
             {
                 return NotFound();
             }
+
+            Materials = new SelectList(QuoteModel.GetMaterialTypes());
             return Page();
         }
 
@@ -47,7 +50,11 @@ namespace MegaDesk_3._0.Pages
                 return Page();
             }
 
+            //QuoteModel.Date = _creationDate;
+            QuoteModel.SetPrice();
+            QuoteModel.SetSize();
             _context.Attach(QuoteModel).State = EntityState.Modified;
+            //_context.Attach(QuoteModel).Entity.Date = _creationDate;
 
             try
             {
@@ -65,7 +72,7 @@ namespace MegaDesk_3._0.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new { id = QuoteModel.ID });
         }
 
         private bool QuoteModelExists(int id)

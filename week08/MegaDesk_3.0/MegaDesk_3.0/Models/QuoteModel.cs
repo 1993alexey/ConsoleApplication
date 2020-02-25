@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,13 +12,26 @@ namespace MegaDesk_3._0.Models
     public class QuoteModel
     {
         public int ID { get; set; }
-        public int Width { get; set; }
-        public int Depth { get; set; }
-        public int Drawers { get; set; }
-        public int Rush { get; set; }
         public decimal Price { get; set; }
         public int Size { get; set; }
         public DateTime Date { get; set; }
+
+        [Range(24, 96)]
+        [Required]
+        public int Width { get; set; }
+
+        [Range(12, 48)]
+        [Required]
+        public int Depth { get; set; }
+
+        [Range(0, 7)]
+        [Required]
+        public int Drawers { get; set; }
+
+        [Required]
+        public int Rush { get; set; }
+
+        [Required(ErrorMessage = "Enter your name")]
         public string Name { get; set; }
 
         [DisplayName("Material Type")]

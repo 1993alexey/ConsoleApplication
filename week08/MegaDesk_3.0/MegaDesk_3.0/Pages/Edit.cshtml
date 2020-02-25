@@ -18,22 +18,22 @@
             <input type="hidden" asp-for="QuoteModel.Date" />
             <div class="form-group">
                 <label asp-for="QuoteModel.Name" class="control-label"></label>
-                <input asp-for="QuoteModel.Name" class="form-control" />
+                <input asp-for="QuoteModel.Name" class="form-control" placeholder="Enter your name ..." />
                 <span asp-validation-for="QuoteModel.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="QuoteModel.Width" class="control-label"></label>
-                <input asp-for="QuoteModel.Width" class="form-control" />
+                <input asp-for="QuoteModel.Width" class="form-control" type="number" min="24" max="96" value="24" />
                 <span asp-validation-for="QuoteModel.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="QuoteModel.Depth" class="control-label"></label>
-                <input asp-for="QuoteModel.Depth" class="form-control" />
+                <input asp-for="QuoteModel.Depth" class="form-control" type="number" min="12" max="48" value="12" />
                 <span asp-validation-for="QuoteModel.Depth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="QuoteModel.Drawers" class="control-label"></label>
-                <input asp-for="QuoteModel.Drawers" class="form-control" />
+                <input asp-for="QuoteModel.Drawers" class="form-control" type="number" min="0" max="7" value="0" />
                 <span asp-validation-for="QuoteModel.Drawers" class="text-danger"></span>
             </div>
             <div class="form-group">

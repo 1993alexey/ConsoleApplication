@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -49,12 +47,9 @@ namespace MegaDesk_3._0.Pages
             {
                 return Page();
             }
-
-            //QuoteModel.Date = _creationDate;
             QuoteModel.SetPrice();
             QuoteModel.SetSize();
             _context.Attach(QuoteModel).State = EntityState.Modified;
-            //_context.Attach(QuoteModel).Entity.Date = _creationDate;
 
             try
             {

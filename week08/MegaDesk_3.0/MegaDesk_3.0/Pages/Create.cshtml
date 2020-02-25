@@ -16,22 +16,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ModelQuote.Name" class="control-label"></label>
-                <input asp-for="ModelQuote.Name" class="form-control" />
+                <input asp-for="ModelQuote.Name" class="form-control" placeholder="Enter your name ..."/>
                 <span asp-validation-for="ModelQuote.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ModelQuote.Width" class="control-label"></label>
-                <input asp-for="ModelQuote.Width" class="form-control" />
+                <input asp-for="ModelQuote.Width" class="form-control" type="number" min="24" max="96" value="24" />
                 <span asp-validation-for="ModelQuote.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ModelQuote.Depth" class="control-label"></label>
-                <input asp-for="ModelQuote.Depth" class="form-control" />
+                <input asp-for="ModelQuote.Depth" class="form-control" type="number" min="12" max="48" value="12" />
                 <span asp-validation-for="ModelQuote.Depth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ModelQuote.Drawers" class="control-label"></label>
-                <input asp-for="ModelQuote.Drawers" class="form-control" />
+                <input asp-for="ModelQuote.Drawers" class="form-control" type="number" min="0" max="7" value="0" />
                 <span asp-validation-for="ModelQuote.Drawers" class="text-danger"></span>
             </div>
             <div class="form-group">

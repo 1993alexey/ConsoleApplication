@@ -21,9 +21,27 @@ namespace MegaDesk_3._0.Pages
 
         public IList<QuoteModel> QuoteModel { get;set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string SortBy { get; set; }
+
         public async Task OnGetAsync()
         {
-            QuoteModel = await _context.QuoteModel.ToListAsync();
+            var quotes = from m in _context.QuoteModel select m;
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                quotes = quotes.Where(s => s.Name.Contains(SearchString));
+            }
+
+            if (SortBy == "name")
+                quotes = quotes.OrderBy(s => s.Name);
+            else
+                quotes = quotes.OrderByDescending(s => s.Date);
+
+            QuoteModel = await quotes.ToListAsync();
         }
     }
 }

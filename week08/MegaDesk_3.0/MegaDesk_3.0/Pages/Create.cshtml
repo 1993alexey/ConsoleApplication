@@ -15,52 +15,34 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Model.Width" class="control-label"></label>
-                <input asp-for="Model.Width" class="form-control" />
-                <span asp-validation-for="Model.Width" class="text-danger"></span>
+                <label asp-for="ModelQuote.Width" class="control-label"></label>
+                <input asp-for="ModelQuote.Width" class="form-control" />
+                <span asp-validation-for="ModelQuote.Width" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model.Depth" class="control-label"></label>
-                <input asp-for="Model.Depth" class="form-control" />
-                <span asp-validation-for="Model.Depth" class="text-danger"></span>
+                <label asp-for="ModelQuote.Depth" class="control-label"></label>
+                <input asp-for="ModelQuote.Depth" class="form-control" />
+                <span asp-validation-for="ModelQuote.Depth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model.Drawers" class="control-label"></label>
-                <input asp-for="Model.Drawers" class="form-control" />
-                <span asp-validation-for="Model.Drawers" class="text-danger"></span>
+                <label asp-for="ModelQuote.Drawers" class="control-label"></label>
+                <input asp-for="ModelQuote.Drawers" class="form-control" />
+                <span asp-validation-for="ModelQuote.Drawers" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model.Rush" class="control-label"></label>
-                <input asp-for="Model.Rush" class="form-control" />
-                <span asp-validation-for="Model.Rush" class="text-danger"></span>
-            </div>
-            @*style="display:none"*@
-            <div class="form-group">
-                <label asp-for="Model.Price" class="control-label"></label>
-                <input asp-for="Model.Price" class="form-control" />
-                <span asp-validation-for="Model.Price" class="text-danger"></span>
-            </div>
-            <div style="display:none" class="form-group">
-                <label asp-for="Model.Size" class="control-label"></label>
-                <input asp-for="Model.Size" class="form-control" />
-                <span asp-validation-for="Model.Size" class="text-danger"></span>
-            </div>
-            
-            <div style="display:none" class="form-group">
-                <label asp-for="Model.Date" class="control-label"></label>
-                <input asp-for="Model.Date" class="form-control" />
-                <span asp-validation-for="Model.Date" class="text-danger"></span>
+                <label asp-for="ModelQuote.Rush" class="control-label"></label>
+                <input asp-for="ModelQuote.Rush" class="form-control" />
+                <span asp-validation-for="ModelQuote.Rush" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model.Name" class="control-label"></label>
-                <input asp-for="Model.Name" class="form-control" />
-                <span asp-validation-for="Model.Name" class="text-danger"></span>
+                <label asp-for="ModelQuote.Name" class="control-label"></label>
+                <input asp-for="ModelQuote.Name" class="form-control" />
+                <span asp-validation-for="ModelQuote.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model.MaterialType" class="control-label"></label>
-                @*<input asp-for="QuoteModel.MaterialType" class="form-control" />*@
-                <select asp-for="Model.MaterialType" asp-items="Model.MaterialTypes" class="form-control"></select>
-                <span asp-validation-for="Model.MaterialType" class="text-danger"></span>
+                <label asp-for="ModelQuote.MaterialType" class="control-label"></label>
+                <select asp-for="ModelQuote.MaterialType" asp-items="Model.MaterialTypes" class="form-control"></select>
+                <span asp-validation-for="ModelQuote.MaterialType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

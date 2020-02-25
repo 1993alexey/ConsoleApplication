@@ -13,23 +13,15 @@ namespace MegaDesk_3._0.Models
         public int Depth { get; set; }
         public int Drawers { get; set; }
         public int Rush { get; set; }
-
-        //[NotMapped]
         public decimal Price { get; set; }
-
-        //[NotMapped]
         public int Size { get; set; }
-
-        //[NotMapped]
         public DateTime Date { get; set; }
         public string Name { get; set; }
         public DesktopMaterial MaterialType { get; set; }
-        //public string MaterialType { get; set; }
 
         public List<string> MaterialTypes { 
             get { return GetMaterialTypes(); }
         }
-
 
         public DateTime SetTimestamp()
         {
@@ -51,27 +43,27 @@ namespace MegaDesk_3._0.Models
             double drawersPrice = Drawers * 50;
             double materialPrice = 0;
 
-            //switch (Material)
-            //{
-            //    case DesktopMaterial.LAMINATE:
-            //        materialPrice = 100;
-            //        break;
-            //    case DesktopMaterial.OAK:
-            //        materialPrice = 200;
-            //        break;
-            //    case DesktopMaterial.PINE:
-            //        materialPrice = 50;
-            //        break;
-            //    case DesktopMaterial.ROSEWOOD:
-            //        materialPrice = 300;
-            //        break;
-            //    case DesktopMaterial.VENEER:
-            //        materialPrice = 125;
-            //        break;
-            //}
+            switch (MaterialType)
+            {
+                case DesktopMaterial.LAMINATE:
+                    materialPrice = 100;
+                    break;
+                case DesktopMaterial.OAK:
+                    materialPrice = 200;
+                    break;
+                case DesktopMaterial.PINE:
+                    materialPrice = 50;
+                    break;
+                case DesktopMaterial.ROSEWOOD:
+                    materialPrice = 300;
+                    break;
+                case DesktopMaterial.VENEER:
+                    materialPrice = 125;
+                    break;
+            }
 
-            //return basePrice + surfacePrice + drawersPrice + materialPrice;
-            return Convert.ToDecimal(basePrice);
+            return Convert.ToDecimal(basePrice + surfacePrice + drawersPrice + materialPrice);
+            //return Convert.ToDecimal(basePrice);
         }
 
         public static List<string> GetMaterialTypes()

@@ -19,7 +19,7 @@ namespace MegaDesk_3._0.Pages
         }
 
         [BindProperty]
-        public QuoteModel Model { get; set; }
+        public QuoteModel ModelQuote { get; set; }
         public SelectList MaterialTypes {get; set;}
 
 
@@ -39,14 +39,11 @@ namespace MegaDesk_3._0.Pages
                 return Page();
             }
 
-            //Model.Date = DateTime.Now;
-            Model.Date = Model.SetTimestamp();
+            ModelQuote.SetTimestamp();
+            ModelQuote.GetSize();
+            ModelQuote.Price = ModelQuote.GetPrice();
 
-            Model.Size = Model.GetSize();
-
-            //Model.Price = Model.GetPrice;
-
-            _context.QuoteModel.Add(Model);
+            _context.QuoteModel.Add(ModelQuote);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -12,11 +12,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" name="createForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ModelQuote.Name" class="control-label"></label>
-                <input asp-for="ModelQuote.Name" class="form-control" placeholder="Enter your name ..."/>
+                <input asp-for="ModelQuote.Name" class="form-control" placeholder="Enter your name ..." />
                 <span asp-validation-for="ModelQuote.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,13 +46,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="ModelQuote.MaterialType" class="control-label"></label>
-                <select asp-for="ModelQuote.MaterialType" asp-items="Model.MaterialTypes" class="form-control"></select>
+                <select id="material-type" asp-for="ModelQuote.MaterialType" asp-items="Model.MaterialTypes" class="form-control"></select>
                 <span asp-validation-for="ModelQuote.MaterialType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div id="side" class="col-md-4">
+        <div id="imageBox">
+            <img id="imageWoodType"src="./image/wood/OAK.jpg" name="woodImage" />
+        </div>
     </div>
 </div>
 
@@ -62,4 +67,16 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        // This is the code to preload the images
+        const materialType = document.getElementById('material-type')
+        const woodImage = document.getElementById('imageWoodType')
+
+        materialType.addEventListener('change', () => {
+            woodImage.src = `./image/wood/${materialType.value.toUpperCase()}.jpg`
+        })
+
+    </script>
+
 }

@@ -1,0 +1,96 @@
+@model MvcMovie.Models.MovieGenreViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Scripts {
+    <script>
+        function submitForm() {
+            document.getElementById('filters').submit()
+        }
+
+        document.getElementById('sort-by').addEventListener('change', submitForm)
+    </script>
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form id="filters">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-inline my-2 my-lg-0 search-block">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" asp-for="SearchString" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <select class="form-control" asp-for="MovieGenre" asp-items="Model.Genres">
+                <option value="">All</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <div class="float-right">
+                <div class="form-group">
+                    <select class="form-control" id="sort-by" asp-for="SortBy">
+                        <option value="name">Sort by name</option>
+                        <option value="date">Sort by date</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

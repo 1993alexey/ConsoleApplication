@@ -7,9 +7,61 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+body {
+    background-image: url("../image/office-desk.jpg");
+    background-color: grey;
+    background-position: center;
+    background-size: cover;
+}
+
+#main {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-style: solid;
+}
+
+#main a {
+    margin-left: 15px !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+h1, h4, h3 {
+    margin-left: 15px !important;
+}
+
+.btn-danger {
+    margin-left: 15px !important;
+}
+
+.navbar {
+    background-color: black !important;
+}
+
+.navbar a {
+    color: white !important;
+}
+
+.footer {
+    background-color: black !important;
+    color: white !important;
+}
+
+
+#imageBox {
+    height: 58%;
+    margin-top:36%;
+}
+
+#imageBox img {
+    width: 100%;
+    height: 323px;
+}
+    /* Provide sufficient contrast against white background */
+    a {
+    color: #0366d6;
 }
 
 .btn-primary {

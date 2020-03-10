@@ -14,4 +14,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Quote.db" />
+  </ItemGroup>
 </Project>

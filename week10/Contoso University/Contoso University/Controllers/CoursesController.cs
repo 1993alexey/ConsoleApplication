@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 
-namespace Contoso_University.Controllers
+namespace ContosoUniversity.Controllers
 {
     public class CoursesController : Controller
     {
@@ -22,8 +22,10 @@ namespace Contoso_University.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var schoolContext = _context.Courses.Include(c => c.Department);
-            return View(await schoolContext.ToListAsync());
+            var courses = _context.Courses
+                .Include(c => c.Department)
+                .AsNoTracking();
+            return View(await courses.ToListAsync());
         }
 
         // GET: Courses/Details/5
@@ -46,12 +48,16 @@ namespace Contoso_University.Controllers
             return View(course);
         }
 
+        // GET: Courses/Create
         public IActionResult Create()
         {
             PopulateDepartmentsDropDownList();
             return View();
         }
 
+        // POST: Courses/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CourseID,Credits,DepartmentID,Title")] Course course)
@@ -66,6 +72,7 @@ namespace Contoso_University.Controllers
             return View(course);
         }
 
+        // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +91,9 @@ namespace Contoso_University.Controllers
             return View(course);
         }
 
+        // POST: Courses/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(int? id)
@@ -154,6 +164,24 @@ namespace Contoso_University.Controllers
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult UpdateCourseCredits()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewData["RowsAffected"] =
+                    await _context.Database.ExecuteSqlCommandAsync(
+                        "UPDATE Course SET Credits = Credits * {0}",
+                        parameters: multiplier);
+            }
+            return View();
         }
 
         private bool CourseExists(int id)

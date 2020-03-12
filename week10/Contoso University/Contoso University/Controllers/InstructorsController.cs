@@ -9,7 +9,7 @@ using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using ContosoUniversity.Models.SchoolViewModels;
 
-namespace Contoso_University.Controllers
+namespace ContosoUniversity.Controllers
 {
     public class InstructorsController : Controller
     {
@@ -28,12 +28,7 @@ namespace Contoso_University.Controllers
                   .Include(i => i.OfficeAssignment)
                   .Include(i => i.CourseAssignments)
                     .ThenInclude(i => i.Course)
-                        .ThenInclude(i => i.Enrollments)
-                            .ThenInclude(i => i.Student)
-                  .Include(i => i.CourseAssignments)
-                    .ThenInclude(i => i.Course)
                         .ThenInclude(i => i.Department)
-                  .AsNoTracking()
                   .OrderBy(i => i.LastName)
                   .ToListAsync();
 
@@ -48,8 +43,13 @@ namespace Contoso_University.Controllers
             if (courseID != null)
             {
                 ViewData["CourseID"] = courseID.Value;
-                viewModel.Enrollments = viewModel.Courses.Where(
-                    x => x.CourseID == courseID).Single().Enrollments;
+                var selectedCourse = viewModel.Courses.Where(x => x.CourseID == courseID).Single();
+                await _context.Entry(selectedCourse).Collection(x => x.Enrollments).LoadAsync();
+                foreach (Enrollment enrollment in selectedCourse.Enrollments)
+                {
+                    await _context.Entry(enrollment).Reference(x => x.Student).LoadAsync();
+                }
+                viewModel.Enrollments = selectedCourse.Enrollments;
             }
 
             return View(viewModel);
@@ -73,6 +73,7 @@ namespace Contoso_University.Controllers
             return View(instructor);
         }
 
+        // GET: Instructors/Create
         public IActionResult Create()
         {
             var instructor = new Instructor();
@@ -105,6 +106,7 @@ namespace Contoso_University.Controllers
             return View(instructor);
         }
 
+        // GET: Instructors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -141,6 +143,10 @@ namespace Contoso_University.Controllers
             }
             ViewData["Courses"] = viewModel;
         }
+
+        // POST: Instructors/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -235,6 +241,7 @@ namespace Contoso_University.Controllers
             return View(instructor);
         }
 
+        // POST: Instructors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

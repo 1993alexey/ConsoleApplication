@@ -5,11 +5,11 @@ using SacramentPlanner.Models;
 
 namespace SacramentPlanner.Services
 {
-    public class MembersService
+    public class MemberService
     {
         private readonly IMongoCollection<MemberModel> _members;
 
-        public MembersService(ISacramentDatabaseSettings settings)
+        public MemberService(ISacramentDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
@@ -28,8 +28,8 @@ namespace SacramentPlanner.Services
             return member;
         }
 
-        public void Update(MemberModel memberIn) =>
-            _members.ReplaceOne(member => member.Id == memberIn.Id, memberIn);
+        public void Update(string id, MemberModel memberIn) =>
+            _members.ReplaceOne(member => member.Id == id, memberIn);
 
         public void Delete(MemberModel memberIn) =>
             _members.DeleteOne(member => member.Id == memberIn.Id);

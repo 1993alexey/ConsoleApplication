@@ -10,14 +10,14 @@ namespace SacramentPlanner.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PlannerController : ControllerBase
+    public class PlannersController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "hello", "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        public PlannerController(ILogger<PlannerController> logger)
+        public PlannersController(ILogger<PlannersController> logger)
         {
 
         }

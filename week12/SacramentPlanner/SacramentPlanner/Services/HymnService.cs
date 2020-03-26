@@ -28,8 +28,8 @@ namespace SacramentPlanner.Services
             return hymn;
         }
 
-        public void Update(HymnModel hymnIn) =>
-            _hymns.ReplaceOne(hymn => hymn.Id == hymnIn.Id, hymnIn);
+        public void Update(string id, HymnModel hymnIn) =>
+            _hymns.ReplaceOne(hymn => hymn.Id == id, hymnIn);
 
         public void Delete(HymnModel hymnIn) =>
             _hymns.DeleteOne(hymn => hymn.Id == hymnIn.Id);

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using SacramentPlanner.Models;
+using SacramentPlanner.Services;
 
 namespace SacramentPlanner
 {
@@ -34,6 +35,11 @@ namespace SacramentPlanner
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton<HymnService>();
+            services.AddSingleton<MemberService>();
+            services.AddSingleton<MemberTitleService>();
+            services.AddSingleton<PlannerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

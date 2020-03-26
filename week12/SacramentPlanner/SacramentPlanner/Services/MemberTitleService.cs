@@ -28,8 +28,8 @@ namespace SacramentPlanner.Services
             return title;
         }
 
-        public void Update(MemberTitleModel titleIn) =>
-            _titles.ReplaceOne(title => title.Id == titleIn.Id, titleIn);
+        public void Update(string id, MemberTitleModel titleIn) =>
+            _titles.ReplaceOne(title => title.Id == id, titleIn);
 
         public void Delete(MemberTitleModel titleIn) =>
             _titles.DeleteOne(title => title.Id == titleIn.Id);

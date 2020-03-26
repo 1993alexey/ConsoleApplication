@@ -22,7 +22,7 @@ namespace SacramentPlanner.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("GetJunk", Name = "GetJunk")]
         public IEnumerable Get()
         {
             return Summaries;

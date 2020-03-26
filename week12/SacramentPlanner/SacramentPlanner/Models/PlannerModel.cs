@@ -5,10 +5,11 @@ namespace SacramentPlanner.Models
 {
     public class PlannerModel
     {
+        public string Id { get; set; }
         public string WardName { get; set; }
         public MemberModel Presiding { get; set; }
         public MemberModel Conducting { get; set; }
-        public HymnModel OpeningHymn { get; set; }  
+        public HymnModel OpeningHymn { get; set; }
         public MemberModel Invocation { get; set; }
         public bool WardBusiness { get; set; }
         public HymnModel SacramentHymn { get; set; }

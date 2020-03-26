@@ -12,13 +12,15 @@ namespace SacramentPlanner.Models
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public MemberTitleModel MemberTitle { get; set; }
+        public string MemberTitle { get; set; }
 
-        public MemberModel(string firstName, string lastName, MemberTitleModel memberTitle)
+        public MemberModel(string firstName, string lastName, string memberTitle)
         {
             FirstName = firstName;
             LastName = lastName;
             MemberTitle = memberTitle;
         }
+
+        public MemberModel() {}
     }
 }

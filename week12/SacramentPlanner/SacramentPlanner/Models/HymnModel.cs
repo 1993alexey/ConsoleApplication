@@ -18,5 +18,7 @@ namespace SacramentPlanner.Models
             Title = title;
             Number = number;
         }
+
+        public HymnModel(){}
     }
 }

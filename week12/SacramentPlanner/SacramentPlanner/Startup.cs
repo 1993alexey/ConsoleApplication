@@ -38,7 +38,6 @@ namespace SacramentPlanner
 
             services.AddSingleton<HymnService>();
             services.AddSingleton<MemberService>();
-            services.AddSingleton<MemberTitleService>();
             services.AddSingleton<PlannerService>();
         }
 

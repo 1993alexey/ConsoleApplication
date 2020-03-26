@@ -6,52 +6,53 @@ using Microsoft.AspNetCore.Mvc;
 using SacramentPlanner.Models;
 using SacramentPlanner.Services;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace SacramentPlanner.Controllers
 {
     [Route("api/[controller]")]
-    public class MemberTitlesController : ControllerBase
+    public class HymnsController : Controller
     {
-        private readonly MemberTitleService _titleService;
-
-        public MemberTitlesController(MemberTitleService titleService)
+        private readonly HymnService _hymnService;
+        public HymnsController(HymnService hymnService)
         {
-            _titleService = titleService;
+            _hymnService = hymnService;
         }
 
         // GET: api/values
         [HttpGet]
-        public ActionResult<IEnumerable<MemberTitleModel>> Get()
+        public ActionResult<IEnumerable<HymnModel>> Get()
         {
-            return _titleService.Get();
+            return _hymnService.Get();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<MemberTitleModel> Get(string id)
+        public ActionResult<HymnModel> Get(string id)
         {
-            return _titleService.Get(id);
+            return _hymnService.Get(id);
         }
 
         // POST api/values
         [HttpPost]
-        public ActionResult<MemberTitleModel> Post([FromBody]MemberTitleModel title)
+        public ActionResult<HymnModel> Post([FromBody]HymnModel title)
         {
-            _titleService.Create(title);
+            _hymnService.Create(title);
             return CreatedAtRoute("", new { id = title.Id.ToString() }, title);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody]MemberTitleModel titleIn)
+        public IActionResult Put(string id, [FromBody]HymnModel titleIn)
         {
-            var title = _titleService.Get(id);
+            var title = _hymnService.Get(id);
 
             if (title == null)
             {
                 return NotFound();
             }
 
-            _titleService.Update(id, titleIn);
+            _hymnService.Update(id, titleIn);
 
             return NoContent();
         }
@@ -60,14 +61,14 @@ namespace SacramentPlanner.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            var title = _titleService.Get(id);
+            var title = _hymnService.Get(id);
 
             if (title == null)
             {
                 return NotFound();
             }
 
-            _titleService.Delete(title.Id);
+            _hymnService.Delete(title.Id);
 
             return NoContent();
         }

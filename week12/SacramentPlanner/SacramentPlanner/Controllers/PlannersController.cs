@@ -12,20 +12,10 @@ namespace SacramentPlanner.Controllers
     [Route("api/[controller]")]
     public class PlannersController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "hello", "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        public PlannersController(ILogger<PlannersController> logger)
+        public PlannersController()
         {
 
-        }
-
-        [HttpGet("GetJunk", Name = "GetJunk")]
-        public IEnumerable Get()
-        {
-            return Summaries;
         }
     }
 }

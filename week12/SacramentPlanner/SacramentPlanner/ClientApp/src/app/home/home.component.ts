@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HymnService } from '../services/hymn.service';
+import { HymnService } from '../hymns/hymn.service';
 
 @Component({
   selector: 'app-home',

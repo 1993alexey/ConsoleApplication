@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HymnService } from '../services/hymn.service';
-import { Hymn } from '../models/hymn.model';
+import { HymnService } from './hymn.service';
+import { Hymn } from './hymn.model';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -29,6 +29,9 @@ export class HymnsComponent implements OnInit {
         this.hymns.push(newHymn)
         this.sortHymns()
       })
+
+    this.hymnsService.getHymns().subscribe(hymns => this.hymns = hymns)
+
   }
 
   delete(id: string) {

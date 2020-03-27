@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { PlannersComponent } from './planners/planners.component';
+import { MembersComponent } from './members/members.component';
 import { HymnsComponent } from './hymns/hymns.component';
 
 @NgModule({
@@ -16,6 +18,8 @@ import { HymnsComponent } from './hymns/hymns.component';
     NavMenuComponent,
     HomeComponent,
     FetchDataComponent,
+    PlannersComponent,
+    MembersComponent,
     HymnsComponent
   ],
   imports: [

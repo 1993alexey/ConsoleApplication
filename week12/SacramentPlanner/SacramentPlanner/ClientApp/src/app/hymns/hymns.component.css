@@ -1,0 +1,32 @@
+tbody > tr:hover {
+  background-color: #fafafa;
+}
+
+.action-icons {
+  color: #808080;
+  display: none;
+}
+
+tbody > tr:hover .action-icons {
+  display: inherit;
+}
+
+#edit {
+
+}
+
+#delete {
+  margin-right: 20px;
+}
+
+#edit:hover {
+  color: rgb(30, 164, 30)
+}
+
+#delete:hover {
+  color: red;
+}
+
+#number-cell {
+  width:100px
+}

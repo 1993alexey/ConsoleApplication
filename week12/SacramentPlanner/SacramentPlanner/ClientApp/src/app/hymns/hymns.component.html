@@ -1,1 +1,53 @@
-<p *ngFor="let hymn of hymns">{{hymn.title}}</p>
+<button class="btn btn-success" data-toggle="modal" data-target="#hymn-modal" data-backdrop="static">Add</button>
+<br><br>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th id="number-cell">#</th>
+        <th>Title</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hymn of hymns">
+        <td>{{hymn.number}}</td>
+        <td>{{hymn.title}}</td>
+        <td>
+          <div class="action-icons">
+            <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(hymn.id)"></fa-icon>
+            <fa-icon id="edit" [icon]="faEdit"></fa-icon>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Create/Edit -->
+<div class="modal fade" id="hymn-modal" tabindex="-1" role="dialog" aria-labelledby="HymnModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="HymnModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Hymn number</label>
+          <input type="text" class="form-control" placeholder="Enter hymn number">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Hymn title</label>
+          <input type="text" class="form-control" placeholder="Enter hymn title">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="create({number: 0, title: 'hi'})">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

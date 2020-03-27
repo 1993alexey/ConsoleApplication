@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace SacramentPlanner.Models
 {
     public class PlannerModel
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
         public string WardName { get; set; }
         public MemberModel Presiding { get; set; }
         public MemberModel Conducting { get; set; }

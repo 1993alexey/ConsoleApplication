@@ -36,6 +36,13 @@ namespace SacramentPlanner
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddCors(options => options.AddPolicy("SlavaPolicy", builder =>
+            {
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod() 
+                       .AllowAnyOrigin();
+            }));
+
             services.AddSingleton<HymnService>();
             services.AddSingleton<MemberService>();
             services.AddSingleton<PlannerService>();
@@ -55,6 +62,7 @@ namespace SacramentPlanner
                 app.UseHsts();
             }
 
+            app.UseCors("SlavaPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())

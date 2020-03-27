@@ -11,12 +11,12 @@ namespace SacramentPlanner.Models
         public string Id { get; set; }
 
         public string Title { get; set; }
-        public int Number { get; set; }
+        public int HymnNumber { get; set; }
 
         public HymnModel(string title, int number)
         {
             Title = title;
-            Number = number;
+            HymnNumber = number;
         }
 
         public HymnModel(){}

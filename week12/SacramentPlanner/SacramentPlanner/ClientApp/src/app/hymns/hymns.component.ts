@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HymnService } from './hymn.service';
 import { Hymn } from './hymn.model';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+declare var $: any;
 
 @Component({
   selector: 'app-hymns',
@@ -9,6 +10,8 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./hymns.component.css']
 })
 export class HymnsComponent implements OnInit {
+  @ViewChild('hymnNumber', { static: true }) hymnNumberInput: any;
+  @ViewChild('hymnTitle', { static: true }) hymnTitleInput: any;
 
   faTrashAlt = faTrashAlt
   faEdit = faEdit
@@ -24,6 +27,9 @@ export class HymnsComponent implements OnInit {
   }
 
   create(hymn: Hymn) {
+    if (typeof hymn.hymnNumber === 'string')
+      hymn.hymnNumber = parseInt(hymn.hymnNumber)
+
     this.hymnsService.addHymn(hymn)
       .subscribe(newHymn => {
         this.hymns.push(newHymn)
@@ -31,7 +37,6 @@ export class HymnsComponent implements OnInit {
       })
 
     this.hymnsService.getHymns().subscribe(hymns => this.hymns = hymns)
-
   }
 
   delete(id: string) {
@@ -40,6 +45,12 @@ export class HymnsComponent implements OnInit {
   }
 
   sortHymns() {
-    this.hymns.sort(((a, b) => a.number - b.number))
+    this.hymns.sort(((a, b) => a.hymnNumber - b.hymnNumber))
+  }
+
+  hideModal() {
+    this.hymnNumberInput.nativeElement.value = ''
+    this.hymnTitleInput.nativeElement.value = ''
+    $("#hymn-modal").modal("hide");
   }
 }

@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let hymn of hymns">
-        <td>{{hymn.number}}</td>
+        <td>{{hymn.hymnNumber}}</td>
         <td>{{hymn.title}}</td>
         <td>
           <div class="action-icons">
@@ -25,7 +25,8 @@
 </div>
 
 <!-- Modal Create/Edit -->
-<div class="modal fade" id="hymn-modal" tabindex="-1" role="dialog" aria-labelledby="HymnModalLabel" aria-hidden="true">
+<div class="modal fade" id="hymn-modal" tabindex="-1" role="dialog" aria-labelledby="HymnModalLabel" aria-hidden="true"
+  #modalForm>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,16 +38,17 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Hymn number</label>
-          <input type="text" class="form-control" placeholder="Enter hymn number">
+          <input type="number" class="form-control" placeholder="Enter hymn number" min="1" #hymnNumber>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Hymn title</label>
-          <input type="text" class="form-control" placeholder="Enter hymn title">
+          <input type="text" class="form-control" placeholder="Enter hymn title" minlength="3" #hymnTitle>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="create({number: 0, title: 'hi'})">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="create({hymnNumber: hymnNumber.value,
+          title: hymnTitle.value}); hideModal()">Save changes</button>
       </div>
     </div>
   </div>

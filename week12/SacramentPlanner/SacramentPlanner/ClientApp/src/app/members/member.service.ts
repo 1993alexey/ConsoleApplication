@@ -27,6 +27,7 @@ export class MemberService {
     }
 
     addMember(member: Member): Observable<Member> {
+        // console.log("the new member in service is " + JSON.stringify(member))
         return this.http.post<Member>(this.membersUrl, member, this.httpOptions)
             .pipe(catchError(this.handleError<Member>()))
     }

@@ -31,6 +31,8 @@ import { HymnsComponent } from './hymns/hymns.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'hymns', component: HymnsComponent },
+      { path: 'members', component: MembersComponent },
+      { path: 'planners', component: PlannersComponent },
     ])
   ],
   providers: [],

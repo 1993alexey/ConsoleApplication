@@ -32,6 +32,7 @@ export class MembersComponent implements OnInit {
   }
 
   create(member: Member) {
+    // console.log("the new member is " + JSON.stringify(member))
     this.memberService.addMember(member)
       .subscribe(newMember => {
         this.members.push(newMember)

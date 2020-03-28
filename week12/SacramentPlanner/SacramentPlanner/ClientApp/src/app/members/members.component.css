@@ -25,6 +25,6 @@ tbody>tr:hover .action-icons {
   color: red;
 }
 
-#number-cell {
-  width: 100px
+.nameCells {
+  width: 150px
 }

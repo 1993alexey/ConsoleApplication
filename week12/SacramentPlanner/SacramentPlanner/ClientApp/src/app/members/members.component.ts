@@ -16,7 +16,13 @@ export class MembersComponent implements OnInit {
 
   faTrashAlt = faTrashAlt
   faEdit = faEdit
+  member: Member
   public members: Member[]
+  id: string
+  lName: string
+  fName: string
+  mTitle: string
+  membersObj: string[]
 
   constructor(private memberService: MemberService) { }
 
@@ -32,7 +38,33 @@ export class MembersComponent implements OnInit {
   }
 
   create(member: Member) {
-    // console.log("the new member is " + JSON.stringify(member))
+    this.memberService.getMembers().subscribe(members => this.members = members)
+
+    // this.membersObj = Object.entries(this.members);
+
+    // console.log(this.members);
+    // console.log(Object.entries(this.members));
+
+    // this.fName = document.getElementById("fName").value
+    // this.lName = document.getElementById("lName").value
+    // this.mTitle = document.getElementById("mTitle").value
+
+    // console.log(this.fName + ' ' + this.lName + ' ' + this.mTitle)
+
+    // arr.filter(obj => Object.keys(obj).some(key => obj[key].includes(searchKey)))
+
+    // if (Object.entries(this.members).filter(obj => Object.keys(obj).some(key => obj[key].includes("5")))) {
+    //   console.log("found it")
+    // } else {
+    //   console.log("screw you!")
+    // }
+
+    // if (Object.entries(this.members).indexOf(this.fName) > -1) {
+    //   console.log("found it")
+    // } else {
+    //   console.log("screw you!")
+    // }
+
     this.memberService.addMember(member)
       .subscribe(newMember => {
         this.members.push(newMember)
@@ -41,6 +73,7 @@ export class MembersComponent implements OnInit {
 
     this.memberService.getMembers().subscribe(members => this.members = members)
   }
+
 
   delete(id: string) {
     this.members = this.members.filter(member => member.id != id)
@@ -52,6 +85,11 @@ export class MembersComponent implements OnInit {
     this.memberlastNameInput.nativeElement.value = ''
     this.memberTitleInput.nativeElement.value = ''
     $("#member-modal").modal("hide");
+  }
+
+  getId(id: string) {
+    this.id = id;
+    this.memberService.getMember(id).subscribe(member => this.member = member)
   }
 
 }

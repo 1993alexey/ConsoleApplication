@@ -36,6 +36,19 @@ export class HymnService {
       .pipe(catchError(this.handleError<any>()))
   }
 
+  // updateHymn(hymn: Hymn, newHymn: Hymn) {
+  //   if (!hymn || !newHymn) {
+  //     return;
+  //   }
+  //   newHymn.id = hymn.id;
+  //   this.http.put(this.hymnsUrl + hymn.id,
+  //     newHymn, this.httpOptions)
+  //     .subscribe(
+  //       (response: Response) => {
+  //       }
+  //     );
+  // }
+
   deleteHymn(hymn: Hymn | string): Observable<Hymn> {
     const id = typeof hymn === 'string' ? hymn : hymn.id;
     const url = `${this.hymnsUrl}/${id}`;

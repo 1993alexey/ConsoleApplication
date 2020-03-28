@@ -21,7 +21,6 @@
             <fa-icon id="edit" (click)="getId(member.id)" [icon]="faEdit" data-toggle="modal"
               data-target="#member-modal" data-backdrop="static">
             </fa-icon>
-            <!-- <button class="btn btn-success" data-toggle="modal" data-target="#member-modal" data-backdrop="static">Add</button> -->
           </div>
         </td>
       </tr>
@@ -43,19 +42,16 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Member first name</label>
-          <!-- <input type="text" class="form-control" placeholder="Enter member's first name" min="1" required #firstName> -->
           <input id="fName" type="text" class="form-control" placeholder="Enter member's first name" min="1" required
             #firstName="ngModel" [ngModel]="member?.firstName">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Member's last name</label>
-          <!-- <input type="text" class="form-control" placeholder="Enter member's last name" min="1" required #lastName> -->
           <input id="lName" type="text" class="form-control" placeholder="Enter member's last name" min="1" required
             #lastName="ngModel" [ngModel]="member?.lastName">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Member's title</label>
-          <!-- <input type="text" class="form-control" placeholder="Enter hymn title" minlength="3" required #memberTitle> -->
           <input id="mTitle" type="text" class="form-control" placeholder="Enter hymn title" minlength="3" required
             #memberTitle="ngModel" [ngModel]="member?.memberTitle">
         </div>

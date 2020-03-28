@@ -16,6 +16,8 @@ export class HymnsComponent implements OnInit {
   faTrashAlt = faTrashAlt
   faEdit = faEdit
   public hymns: Hymn[]
+  hymn: Hymn
+  id: string
 
   constructor(private hymnsService: HymnService) { }
 
@@ -39,6 +41,12 @@ export class HymnsComponent implements OnInit {
     this.hymnsService.getHymns().subscribe(hymns => this.hymns = hymns)
   }
 
+  // updateDocument() {
+  //   const newHymn = new Hymn(this.hymn.hymnNumber, this.hymn.title);
+  //   this.hymnsService.updateHymn(this.hymn, newHymn);
+  // }
+
+
   delete(id: string) {
     this.hymns = this.hymns.filter(hymn => hymn.id != id)
     this.hymnsService.deleteHymn(id).subscribe()
@@ -52,5 +60,10 @@ export class HymnsComponent implements OnInit {
     this.hymnNumberInput.nativeElement.value = ''
     this.hymnTitleInput.nativeElement.value = ''
     $("#hymn-modal").modal("hide");
+  }
+
+  getId(id: string) {
+    this.id = id;
+    this.hymnsService.getHymn(id).subscribe(hymn => this.hymn = hymn)
   }
 }

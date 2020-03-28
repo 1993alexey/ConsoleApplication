@@ -16,7 +16,9 @@
         <td>
           <div class="action-icons">
             <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(hymn.id)"></fa-icon>
-            <fa-icon id="edit" [icon]="faEdit"></fa-icon>
+            <fa-icon id="edit" (click)="getId(hymn.id)" [icon]="faEdit" data-toggle="modal" data-target="#hymn-modal"
+              data-backdrop="static">
+            </fa-icon>
           </div>
         </td>
       </tr>
@@ -38,11 +40,13 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Hymn number</label>
-          <input type="number" class="form-control" placeholder="Enter hymn number" min="1" #hymnNumber>
+          <input type="number" class="form-control" placeholder="Enter hymn number" min="1" required
+            #hymnNumber="ngModel" [ngModel]="hymn?.hymnNumber">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Hymn title</label>
-          <input type="text" class="form-control" placeholder="Enter hymn title" minlength="3" #hymnTitle>
+          <input type="text" class="form-control" placeholder="Enter hymn title" minlength="3" required
+            #hymnTitle="ngModel" [ngModel]="hymn?.title">
         </div>
       </div>
       <div class="modal-footer">

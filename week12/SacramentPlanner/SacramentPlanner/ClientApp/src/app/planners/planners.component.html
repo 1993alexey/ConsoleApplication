@@ -1,1 +1,159 @@
-<p>planners works!</p>
+<button class="btn btn-success" data-toggle="modal" data-target="#planner-modal" data-backdrop="static">Add</button>
+<br><br>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ward Name</th>
+        <th>Presiding</th>
+        <th>Conducting</th>
+        <th>Opening Hymn</th>
+        <th>Invocation</th>
+        <th>Ward Business</th>
+        <th>Sacrament Hymn</th>
+        <th>Sacrament Passing</th>
+        <th>Talks</th>
+        <th>Musical Number</th>
+        <th>Closing Hymn</th>
+        <th>Benediction</th>
+        <th>Dismissal Song</th>
+        <th>Sacrament Date</th>
+        <!--
+        public wardName: string,
+        public presiding: Member,
+        public conducting: Member,
+        public openingHymn: Hymn,
+        public invocation: Member,
+        public wardBusiness: string,
+        public sacramentHymn: Hymn,
+        public sacramentPassing: boolean,
+        public Talks: Talk[],
+        public musicalNumber: MusicalNumber,
+        public closingHymn: Hymn,
+        public benediction: Member,
+        public dismissalSong: Hymn,
+        public sacramentDate: string -->
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let planner of planners">
+        <td class="plannerCells">{{planner.wardName}}</td>
+        <td class="plannerCells">{{planner.presiding}}</td>
+        <td class="plannerCells">{{planner.conducting}}</td>
+        <td class="plannerCells">{{planner.openingHymn}}</td>
+        <td class="plannerCells">{{planner.invocation}}</td>
+        <td class="plannerCells">{{planner.wardBusiness}}</td>
+        <td class="plannerCells">{{planner.sacramentHymn}}</td>
+        <td class="plannerCells">{{planner.sacramentPassing}}</td>
+        <td class="plannerCells">{{planner.Talks}}</td>
+        <td class="plannerCells">{{planner.musicalNumber}}</td>
+        <td class="plannerCells">{{planner.closingHymn}}</td>
+        <td class="plannerCells">{{planner.benediction}}</td>
+        <td class="plannerCells">{{planner.dismissalSong}}</td>
+        <td class="plannerCells">{{planner.sacramentDate}}</td>
+        <td>
+          <div class="action-icons">
+            <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(planner.id)"></fa-icon>
+            <fa-icon id="edit" (click)="getId(planner.id)" [icon]="faEdit" data-toggle="modal"
+              data-target="#planner-modal" data-backdrop="static">
+            </fa-icon>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Create/Edit -->
+<!-- <div class="modal fade" id="planner-modal" tabindex="-1" role="dialog" aria-labelledby="plannerModalLabel"
+  aria-hidden="true" #modalForm>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="PlannerModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward name</label>
+          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="create({lastName: lastName.value, firstName: firstName.value,
+          memberTitle: memberTitle.value}); hideModal()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->

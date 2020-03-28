@@ -8,34 +8,34 @@ namespace SacramentPlanner.Services
     public class PlannerService
     {
 
-        private readonly IMongoCollection<PlannerModel> _planner;
+        private readonly IMongoCollection<PlannerModel> _planners;
 
         public PlannerService(ISacramentDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-            _planner = database.GetCollection<PlannerModel>(settings.PlannerCollectionName);
+            _planners = database.GetCollection<PlannerModel>(settings.PlannerCollectionName);
         }
 
         public List<PlannerModel> Get() =>
-            _planner.Find(planner => true).ToList();
+            _planners.Find(planner => true).ToList();
 
         public PlannerModel Get(string id) =>
-            _planner.Find(planner => planner.Id == id).FirstOrDefault();
+            _planners.Find(planner => planner.Id == id).FirstOrDefault();
 
         public PlannerModel Create(PlannerModel planner)
         {
-            _planner.InsertOne(planner);
+            _planners.InsertOne(planner);
             return planner;
         }
 
         public void Update(string id, PlannerModel plannerIn) =>
-            _planner.ReplaceOne(planner => planner.Id == id, plannerIn);
+            _planners.ReplaceOne(planner => planner.Id == id, plannerIn);
 
         public void Delete(PlannerModel plannerIn) =>
-            _planner.DeleteOne(planner => planner.Id == plannerIn.Id);
+            _planners.DeleteOne(planner => planner.Id == plannerIn.Id);
 
         public void Delete(string id) =>
-            _planner.DeleteOne(planner => planner.Id == id);
+            _planners.DeleteOne(planner => planner.Id == id);
     }
 }

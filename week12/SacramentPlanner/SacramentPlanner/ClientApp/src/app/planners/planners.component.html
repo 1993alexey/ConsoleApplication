@@ -1,4 +1,5 @@
-<button class="btn btn-success" data-toggle="modal" data-target="#planner-modal" data-backdrop="static">Add</button>
+<button class="btn btn-success" data-toggle="modal" data-target="#planner-modal" data-backdrop="static"
+  (click)="addModeOn()">Add</button>
 <br><br>
 <div class="table-responsive">
   <table class="table">
@@ -28,7 +29,8 @@
         <!-- PRESIDING -->
         <td class="plannerCells">
           <ul>
-            <li>{{planner.presiding.firstName}} {{planner.presiding.lastName}}</li>
+            <li>{{planner.presiding.firstName}}</li>
+            <li>{{planner.presiding.lastName}}</li>
             <li>{{planner.presiding.memberTitle}}</li>
           </ul>
         </td>
@@ -68,9 +70,9 @@
         <td class="plannerCells">
           <!-- <td class="plannerCells"> -->
           <ul *ngFor="let talk of planner.talks">
-            <!-- HELLO? -->
             <li>{{talk.talkTitle}}</li>
-            <li>{{talk.speaker.firstName}} {{talk.speaker.lastName}}</li>
+            <li>{{talk.speaker.firstName}}</li>
+            <li>{{talk.speaker.lastName}}</li>
             <li>The time limit is {{talk.timeLimit}}</li>
           </ul>
         </td>
@@ -91,7 +93,8 @@
         <!-- BENEDICTION -->
         <td class="plannerCells">
           <ul>
-            <li>{{planner.benediction.firstName}} {{planner.benediction.lastName}}</li>
+            <li>{{planner.benediction.firstName}}</li>
+            <li>{{planner.benediction.lastName}}</li>
           </ul>
         </td>
         <!-- DISMISSAL SONG -->
@@ -102,11 +105,11 @@
           </ul>
         </td>
         <!-- SACRAMENT DATE -->
-        <td class="plannerCells">{{planner.sacramentDate}}</td>
+        <td class="plannerCells">{{planner.sacramentDate | date :  "shortDate"}}</td>
         <td>
           <div class="action-icons">
             <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(planner.id)"></fa-icon>
-            <fa-icon id="edit" (click)="getId(planner.id)" [icon]="faEdit" data-toggle="modal"
+            <fa-icon id="edit" (click)="editModeOn()" (click)="getId(planner.id)" [icon]="faEdit" data-toggle="modal"
               data-target="#planner-modal" data-backdrop="static">
             </fa-icon>
           </div>
@@ -117,94 +120,150 @@
 </div>
 
 <!-- Modal Create/Edit -->
-<!-- <div class="modal fade" id="planner-modal" tabindex="-1" role="dialog" aria-labelledby="plannerModalLabel"
+<div class="modal fade" id="planner-modal" tabindex="-1" role="dialog" aria-labelledby="plannerModalLabel"
   aria-hidden="true" #modalForm>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <!-- fix the modal title -->
         <h5 class="modal-title" id="PlannerModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <!-- Start here -->
+        <!-- WARD NAME -->
         <div class="form-group">
           <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <input type="text" class="form-control" placeholder="Ward name" min="1" required #wardName="ngModel"
+            [ngModel]="planner?.wardName">
         </div>
+        <!-- PRESIDING -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Presiding</label>
+          <input type="text" class="form-control" placeholder="First name" min="1" required
+            #presidingFirstName="ngModel" [ngModel]="planner?.presiding.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required #presidingLastName="ngModel"
+            [ngModel]="planner?.presiding.lastName">
+          <input type="text" class="form-control" placeholder="Member title" min="1" required #presidingTitle="ngModel"
+            [ngModel]="planner?.presiding.memberTitle">
         </div>
+        <!-- CONDUCTING -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Conducting</label>
+          <input type="text" class="form-control" placeholder="First name" min="1" required
+            #conductingFirstName="ngModel" [ngModel]="planner?.conducting.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required #conductingLastName="ngModel"
+            [ngModel]="planner?.conducting.lastName">
+          <input type="text" class="form-control" placeholder="Member title" min="1" required #conductingTitle="ngModel"
+            [ngModel]="planner?.conducting.memberTitle">
         </div>
+        <!-- OPENING HYMN -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Opening hymn</label>
+          <input type="text" class="form-control" placeholder="Hymn title" min="1" required #openingHymnTitle="ngModel"
+            [ngModel]="planner?.openingHymn.title">
+          <input type="text" class="form-control" placeholder="Hymn number" min="1" required
+            #openingHymnNumber="ngModel" [ngModel]="planner?.openingHymn.hymnNumber">
         </div>
+        <!-- INVOCATION -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Invocation</label>
+          <input type="text" class="form-control" placeholder="First name" min="1" required
+            #invocationFirstName="ngModel" [ngModel]="planner?.invocation.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required #invocationLastName="ngModel"
+            [ngModel]="planner?.invocation.lastName">
+          <input type="text" class="form-control" placeholder="Member title" min="1" required #invocationTitle="ngModel"
+            [ngModel]="planner?.invocation.memberTitle">
         </div>
-        <div class="form-group">
+        <!-- WARD BUSINESS -->
+        <!-- <div class="form-group">
           <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
+          <input type="text" class="form-control" placeholder="Enter ward name" min="1" required
             #wardName="ngModel" [ngModel]="planner?.wardName">
+        </div> -->
+        <!-- SACRAMENT HYMN -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">Sacrament hymn</label>
+          <input type="text" class="form-control" placeholder="Hymn title" min="1" required
+            #sacramentHymnTitle="ngModel" [ngModel]="planner?.sacramentHymn.title">
+          <input type="text" class="form-control" placeholder="Hymn number" min="1" required
+            #sacramentHymnNumber="ngModel" [ngModel]="planner?.sacramentHymn.hymnNumber">
         </div>
+        <!-- SACRAMENT PASSING -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Sacrament passing</label>
+          <input type="text" class="form-control" placeholder="Passing sacrament?" min="1" required #wardName="ngModel"
+            [ngModel]="planner?.sacramentPassing">
         </div>
+        <!-- TALKS -->
+
+        <!-- error is somewhere here -->
+        <!-- <div class="form-group" *ngFor="let talk of planner.talks">
+          <label for="exampleInputEmail1">Talk</label>
+          <input type="text" class="form-control" placeholder="Talk title" min="1" required #talkTitle="ngModel"
+            [ngModel]="talk.talkTitle">
+          <input type="text" class="form-control" placeholder="Talk first name" min="1" required
+            #talkFirstName="ngModel" [ngModel]="talk.speaker.firstName">
+          <input type="text" class="form-control" placeholder="Talk last name" min="1" required #talkLastName="ngModel"
+            [ngModel]="talk.speaker.lastName">
+          <input type="text" class="form-control" placeholder="Talk time limit" min="1" required #talkLimit="ngModel"
+            [ngModel]="talk.timeLimit">
+        </div> -->
+
+        <!-- MUSICAL NUMBER -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Musical number</label>
+          <input type="text" class="form-control" placeholder="Musical number title" min="1" required
+            #musicalNumberTitle="ngModel" [ngModel]="planner?.musicalNumber.title">
+          <input type="text" class="form-control" placeholder="Perfomed after talk #" min="1" required
+            #afterTalk="ngModel" [ngModel]="planner?.musicalNumber.performAfterTalk">
         </div>
+        <!-- CLOSING HYMN -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Closing hymn</label>
+          <input type="text" class="form-control" placeholder="Closing hymn title" min="1" required
+            #closingHymnTitle="ngModel" [ngModel]="planner?.closingHymn.title">
+          <input type="text" class="form-control" placeholder="Closing hymn title" min="1" required
+            #closingHymnNumber="ngModel" [ngModel]="planner?.closingHymn.hymnNumber">
         </div>
+        <!-- BENEDICTION -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Benediction</label>
+          <input type="text" class="form-control" placeholder="First name" min="1" required
+            #benedictionFirstName="ngModel" [ngModel]="planner?.benediction.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required
+            #benedictionLastName="ngModel" [ngModel]="planner?.benediction.lastName">
+          <input type="text" class="form-control" placeholder="Member title" min="1" required
+            #benedictionTitle="ngModel" [ngModel]="planner?.benediction.memberTitle">
         </div>
+        <!-- DISMISSAL SONG -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Dismissal song</label>
+          <input type="text" class="form-control" placeholder="Dismissal song title" min="1" required
+            #dismissalSongTitle="ngModel" [ngModel]="planner?.dismissalSong.title">
+          <input type="text" class="form-control" placeholder="Dismissal song number" min="1" required
+            #dismissalSongHymnNumber="ngModel" [ngModel]="planner?.dismissalSong.hymnNumber">
         </div>
+        <!-- SACRAMENT DATE -->
         <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input id="fName" type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+          <label for="exampleInputEmail1">Sacrament date</label>
+          <input type="date" class="form-control" placeholder="Enter sacrament meeting date" min="1" required
+            #wardName="ngModel" [ngModel]="planner?.sacramentDate">
         </div>
 
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" *ngIf="editMode === false">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="create({lastName: lastName.value, firstName: firstName.value,
           memberTitle: memberTitle.value}); hideModal()">Save changes</button>
       </div>
+      <div class="modal-footer" *ngIf="editMode === true">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="edit({lastName: lastName.value, firstName: firstName.value,
+          memberTitle: memberTitle.value}); hideModal()">Edit changes</button>
+      </div>
     </div>
   </div>
-</div> -->
+</div>

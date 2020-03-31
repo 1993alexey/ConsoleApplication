@@ -11,10 +11,10 @@ export class Planner {
     public conducting: Member
     public openingHymn: Hymn
     public invocation: Member
-    public wardBusiness: string
+    public wardBusiness: boolean //string
     public sacramentHymn: Hymn
     public sacramentPassing: boolean
-    public Talks: Talk[]
+    public talks: Talk[]
     public musicalNumber: MusicalNumber
     public closingHymn: Hymn
     public benediction: Member
@@ -27,10 +27,10 @@ export class Planner {
         conducting: Member,
         openingHymn: Hymn,
         invocation: Member,
-        wardBusiness: string,
+        wardBusiness: boolean, // string,
         sacramentHymn: Hymn,
         sacramentPassing: boolean,
-        Talks: Talk[],
+        talks: Talk[],
         musicalNumber: MusicalNumber,
         closingHymn: Hymn,
         benediction: Member,
@@ -45,7 +45,7 @@ export class Planner {
         this.wardBusiness = wardBusiness
         this.sacramentHymn = sacramentHymn
         this.sacramentPassing = sacramentPassing
-        this.Talks = Talks
+        this.talks = talks
         this.musicalNumber = musicalNumber
         this.closingHymn = closingHymn
         this.benediction = benediction

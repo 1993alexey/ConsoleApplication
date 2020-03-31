@@ -25,5 +25,39 @@ namespace SacramentPlanner.Models
         public MemberModel Benediction { get; set; }
         public HymnModel DismissalSong { get; set; }
         public DateTime SacramentDate { get; set; }
+
+        public PlannerModel(
+            string wardName,
+            MemberModel presiding,
+            MemberModel conducting,
+            HymnModel openingHymn,
+            MemberModel invocation,
+            bool wardBusiness,
+            HymnModel sacramentHymn,
+            bool sacramentPassing,
+            List<TalkModel> talks,
+            MusicalNumberModel musicalNumber,
+            HymnModel closingHymn,
+            MemberModel benediction,
+            HymnModel dismissalSong,
+            DateTime sacramentDate)
+        {
+            WardName = wardName;
+            Presiding = presiding;
+            Conducting = conducting;
+            OpeningHymn = openingHymn;
+            Invocation = invocation;
+            WardBusiness = wardBusiness;
+            SacramentHymn = sacramentHymn;
+            SacramentPassing = SacramentPassing;
+            Talks = talks;
+            MusicalNumber = musicalNumber;
+            ClosingHymn = closingHymn;
+            Benediction = benediction;
+            DismissalSong = dismissalSong;
+            SacramentDate = sacramentDate;
+        }
+
+        public PlannerModel() { }
     }
 }

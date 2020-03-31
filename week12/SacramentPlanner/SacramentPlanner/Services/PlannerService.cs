@@ -14,7 +14,7 @@ namespace SacramentPlanner.Services
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
-            _planners = database.GetCollection<PlannerModel>(settings.PlannerCollectionName);
+            _planners = database.GetCollection<PlannerModel>(settings.PlannersCollectionName);
         }
 
         public List<PlannerModel> Get() =>

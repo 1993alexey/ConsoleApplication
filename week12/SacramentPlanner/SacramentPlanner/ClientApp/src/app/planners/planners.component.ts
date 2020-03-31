@@ -27,8 +27,8 @@ export class PlannersComponent implements OnInit {
 
   faTrashAlt = faTrashAlt
   faEdit = faEdit
-  public planners: Planner[]
   planner: Planner
+  public planners: Planner[]
   id: string
 
   constructor(private plannerService: PlannerService) { }
@@ -36,6 +36,8 @@ export class PlannersComponent implements OnInit {
   ngOnInit() {
     this.plannerService.getPlanners().subscribe(planners => {
       this.planners = planners
+      console.log(JSON.parse(JSON.stringify(this.planners)));
+      console.log(this.planners[1].presiding.firstName);
       this.sortPlanners()
     })
   }

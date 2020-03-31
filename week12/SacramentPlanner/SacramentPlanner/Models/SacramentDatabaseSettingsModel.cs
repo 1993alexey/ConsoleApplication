@@ -3,7 +3,7 @@ namespace SacramentPlanner.Models
 {
     public class SacramentDatabaseSettings : ISacramentDatabaseSettings
     {
-        public string PlannerCollectionName { get; set; }
+        public string PlannersCollectionName { get; set; }
         public string MembersCollectionName { get; set; }
         public string TitlesCollectionName { get; set; }
         public string HymnsCollectionName { get; set; }
@@ -13,7 +13,7 @@ namespace SacramentPlanner.Models
 
     public interface ISacramentDatabaseSettings
     {
-        string PlannerCollectionName { get; set; }
+        string PlannersCollectionName { get; set; }
         string MembersCollectionName { get; set; }
         string TitlesCollectionName { get; set; }
         string HymnsCollectionName { get; set; }

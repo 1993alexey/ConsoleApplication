@@ -19,7 +19,7 @@ export class Planner {
     public closingHymn: Hymn
     public benediction: Member
     public dismissalSong: Hymn
-    public sacramentDate: Date //???
+    public sacramentDate: Date
 
     constructor(
         wardName: string,

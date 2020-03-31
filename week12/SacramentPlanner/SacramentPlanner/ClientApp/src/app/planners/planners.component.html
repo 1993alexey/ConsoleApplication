@@ -9,7 +9,7 @@
         <th>Conducting</th>
         <th>Opening Hymn</th>
         <th>Invocation</th>
-        <th>Ward Business</th>
+        <!-- <th>Ward Business</th> -->
         <th>Sacrament Hymn</th>
         <th>Sacrament Passing</th>
         <th>Talks</th>
@@ -18,39 +18,90 @@
         <th>Benediction</th>
         <th>Dismissal Song</th>
         <th>Sacrament Date</th>
-        <!--
-        public wardName: string,
-        public presiding: Member,
-        public conducting: Member,
-        public openingHymn: Hymn,
-        public invocation: Member,
-        public wardBusiness: string,
-        public sacramentHymn: Hymn,
-        public sacramentPassing: boolean,
-        public Talks: Talk[],
-        public musicalNumber: MusicalNumber,
-        public closingHymn: Hymn,
-        public benediction: Member,
-        public dismissalSong: Hymn,
-        public sacramentDate: string -->
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let planner of planners">
+        <!-- WARD NAME -->
         <td class="plannerCells">{{planner.wardName}}</td>
-        <td class="plannerCells">{{planner.presiding}}</td>
-        <td class="plannerCells">{{planner.conducting}}</td>
-        <td class="plannerCells">{{planner.openingHymn}}</td>
-        <td class="plannerCells">{{planner.invocation}}</td>
+        <!-- PRESIDING -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.presiding.firstName}} {{planner.presiding.lastName}}</li>
+            <li>{{planner.presiding.memberTitle}}</li>
+          </ul>
+        </td>
+        <!-- CONDUCTING -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.conducting.firstName}}</li>
+            <li>{{planner.conducting.lastName}}</li>
+          </ul>
+        </td>
+        <!-- OPENING HYMN -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.openingHymn.title}}</li>
+            <li>{{planner.openingHymn.hymnNumber}}</li>
+          </ul>
+        </td>
+        <!-- INVOCATION -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.invocation.firstName}}</li>
+            <li>{{planner.invocation.lastName}}</li>
+          </ul>
+        </td>
+        <!-- WARD BUSINESS -->
+        <!-- <td class="plannerCells">{{planner.wardBusiness}}</td> -->
+        <!-- SACRAMENT HYMN -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.sacramentHymn.title}}</li>
+            <li>{{planner.sacramentHymn.hymnNumber}}</li>
+          </ul>
+        </td>
+        <!-- SACRAMENT PASSING -->
         <td class="plannerCells">{{planner.wardBusiness}}</td>
-        <td class="plannerCells">{{planner.sacramentHymn}}</td>
-        <td class="plannerCells">{{planner.sacramentPassing}}</td>
-        <td class="plannerCells">{{planner.Talks}}</td>
-        <td class="plannerCells">{{planner.musicalNumber}}</td>
-        <td class="plannerCells">{{planner.closingHymn}}</td>
-        <td class="plannerCells">{{planner.benediction}}</td>
-        <td class="plannerCells">{{planner.dismissalSong}}</td>
+        <!-- TALKS -->
+        <td class="plannerCells">
+          <!-- <td class="plannerCells"> -->
+          <ul *ngFor="let talk of planner.talks">
+            <!-- HELLO? -->
+            <li>{{talk.talkTitle}}</li>
+            <li>{{talk.speaker.firstName}} {{talk.speaker.lastName}}</li>
+            <li>The time limit is {{talk.timeLimit}}</li>
+          </ul>
+        </td>
+        <!-- MUSICAL NUMBER -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.musicalNumber.title}}</li>
+            <li>Perform after talk # {{planner.musicalNumber.performAfterTalk}}</li>
+          </ul>
+        </td>
+        <!-- CLOSING HYMN -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.closingHymn.title}}</li>
+            <li>{{planner.closingHymn.hymnNumber}}</li>
+          </ul>
+        </td>
+        <!-- BENEDICTION -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.benediction.firstName}} {{planner.benediction.lastName}}</li>
+          </ul>
+        </td>
+        <!-- DISMISSAL SONG -->
+        <td class="plannerCells">
+          <ul>
+            <li>{{planner.dismissalSong.title}}</li>
+            <li>{{planner.dismissalSong.hymnNumber}}</li>
+          </ul>
+        </td>
+        <!-- SACRAMENT DATE -->
         <td class="plannerCells">{{planner.sacramentDate}}</td>
         <td>
           <div class="action-icons">

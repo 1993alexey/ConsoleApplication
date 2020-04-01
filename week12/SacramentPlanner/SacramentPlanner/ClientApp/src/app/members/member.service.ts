@@ -32,7 +32,9 @@ export class MemberService {
     }
 
     updateMember(member: Member): Observable<any> {
-        return this.http.put<Member>(this.membersUrl, member, this.httpOptions)
+        console.log("I am in the updateMember function")
+        console.log(member)
+        return this.http.put<Member>(`${this.membersUrl}/${member.id}`, member, this.httpOptions)
             .pipe(catchError(this.handleError<any>()))
     }
 

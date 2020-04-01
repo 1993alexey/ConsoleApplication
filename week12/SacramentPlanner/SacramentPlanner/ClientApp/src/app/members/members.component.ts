@@ -16,13 +16,9 @@ export class MembersComponent implements OnInit {
 
   faTrashAlt = faTrashAlt
   faEdit = faEdit
-  member: Member
   public members: Member[]
-  id: string
-  lName: string
-  fName: string
-  mTitle: string
-  membersObj: string[]
+  oneMember = new Member()
+  editMode = false
 
   constructor(private memberService: MemberService) { }
 
@@ -39,6 +35,7 @@ export class MembersComponent implements OnInit {
 
   create(member: Member) {
     this.memberService.getMembers().subscribe(members => this.members = members)
+
     this.memberService.addMember(member)
       .subscribe(newMember => {
         this.members.push(newMember)
@@ -48,22 +45,31 @@ export class MembersComponent implements OnInit {
     this.memberService.getMembers().subscribe(members => this.members = members)
   }
 
+  edit() {
+    this.memberService.updateMember(this.oneMember).subscribe()
+  }
 
   delete(id: string) {
     this.members = this.members.filter(member => member.id != id)
     this.memberService.deleteMember(id).subscribe()
   }
 
+  showModal(member: Member) {
+    if (!member)
+      this.oneMember = new Member()
+    else
+      this.oneMember = member
+
+    this.editMode = member ? true : false
+    $("#member-modal").modal("show");
+  }
+
   hideModal() {
+    this.oneMember = new Member()
     this.memberFirstNameInput.nativeElement.value = ''
     this.memberlastNameInput.nativeElement.value = ''
     this.memberTitleInput.nativeElement.value = ''
     $("#member-modal").modal("hide");
-  }
-
-  getId(id: string) {
-    this.id = id;
-    this.memberService.getMember(id).subscribe(member => this.member = member)
   }
 
 }

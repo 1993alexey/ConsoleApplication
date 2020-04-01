@@ -43,14 +43,6 @@ export class HymnsComponent implements OnInit {
 
   edit() {
     this.hymnsService.updateHymn(this.oneHymn).subscribe()
-    // for (let hymn of this.hymns) {
-    //   if (hymn.id == this.oneHymn.id) {
-    //     hymn = this.oneHymn
-    //     break
-    //   }
-    // }
-
-    // this.oneHymn = null
   }
 
   showModal(hymn: Hymn) {

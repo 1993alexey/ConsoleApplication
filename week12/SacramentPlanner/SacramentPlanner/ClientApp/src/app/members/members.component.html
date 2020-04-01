@@ -1,25 +1,26 @@
-<button class="btn btn-success" data-toggle="modal" data-target="#member-modal" data-backdrop="static">Add</button>
+<button class="btn btn-success" data-toggle="modal" data-target="#member-modal" data-backdrop="static"
+  (click)="showModal()">Add</button>
 <br><br>
 <div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
-        <th>Last Name</th>
-        <th>First Name</th>
+        <th class="nameCells">Last Name</th>
+        <th class="nameCells">First Name</th>
         <th>Member's Title</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let member of members">
-        <td class="nameCells">{{member.lastName}}</td>
-        <td class="nameCells">{{member.firstName}}</td>
+        <td>{{member.lastName}}</td>
+        <td>{{member.firstName}}</td>
         <td>{{member.memberTitle}}</td>
         <td>
           <div class="action-icons">
             <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(member.id)"></fa-icon>
-            <fa-icon id="edit" (click)="getId(member.id)" [icon]="faEdit" data-toggle="modal"
-              data-target="#member-modal" data-backdrop="static">
+            <fa-icon id="edit" [icon]="faEdit" data-toggle="modal" data-target="#member-modal" data-backdrop="static"
+              (click)="showModal(member)">
             </fa-icon>
           </div>
         </td>
@@ -34,8 +35,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="MemberModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="MemberModalLabel" *ngIf="!editMode">Add Member</h5>
+        <h5 class="modal-title" id="MemberModalLabel" *ngIf="editMode">Edit Member</h5>
+        <button type="button" class="close" (click)="hideModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -43,23 +45,25 @@
         <div class="form-group">
           <label for="exampleInputEmail1">Member first name</label>
           <input id="fName" type="text" class="form-control" placeholder="Enter member's first name" min="1" required
-            #firstName="ngModel" [ngModel]="member?.firstName">
+            #firstName [(ngModel)]="oneMember.firstName">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Member's last name</label>
           <input id="lName" type="text" class="form-control" placeholder="Enter member's last name" min="1" required
-            #lastName="ngModel" [ngModel]="member?.lastName">
+            #lastName [(ngModel)]="oneMember.lastName">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Member's title</label>
           <input id="mTitle" type="text" class="form-control" placeholder="Enter hymn title" minlength="3" required
-            #memberTitle="ngModel" [ngModel]="member?.memberTitle">
+            #memberTitle [(ngModel)]="oneMember.memberTitle">
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
         <button type="button" class="btn btn-primary" (click)="create({lastName: lastName.value, firstName: firstName.value,
-          memberTitle: memberTitle.value}); hideModal()">Save changes</button>
+          memberTitle: memberTitle.value}); hideModal()" *ngIf="!editMode">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="edit(); hideModal()" *ngIf="editMode">Save
+          changes</button>
       </div>
     </div>
   </div>

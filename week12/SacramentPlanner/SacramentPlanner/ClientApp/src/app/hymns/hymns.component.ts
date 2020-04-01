@@ -16,8 +16,8 @@ export class HymnsComponent implements OnInit {
   faTrashAlt = faTrashAlt
   faEdit = faEdit
   public hymns: Hymn[]
-  hymn: Hymn
-  id: string
+  oneHymn = new Hymn()
+  editMode = false
 
   constructor(private hymnsService: HymnService) { }
 
@@ -41,11 +41,27 @@ export class HymnsComponent implements OnInit {
     this.hymnsService.getHymns().subscribe(hymns => this.hymns = hymns)
   }
 
-  // updateDocument() {
-  //   const newHymn = new Hymn(this.hymn.hymnNumber, this.hymn.title);
-  //   this.hymnsService.updateHymn(this.hymn, newHymn);
-  // }
+  edit() {
+    this.hymnsService.updateHymn(this.oneHymn).subscribe()
+    // for (let hymn of this.hymns) {
+    //   if (hymn.id == this.oneHymn.id) {
+    //     hymn = this.oneHymn
+    //     break
+    //   }
+    // }
 
+    // this.oneHymn = null
+  }
+
+  showModal(hymn: Hymn) {
+    if (!hymn)
+      this.oneHymn = new Hymn()
+    else
+      this.oneHymn = hymn
+
+    this.editMode = hymn ? true : false
+    $("#hymn-modal").modal("show");
+  }
 
   delete(id: string) {
     this.hymns = this.hymns.filter(hymn => hymn.id != id)
@@ -57,13 +73,9 @@ export class HymnsComponent implements OnInit {
   }
 
   hideModal() {
+    this.oneHymn = new Hymn()
     this.hymnNumberInput.nativeElement.value = ''
     this.hymnTitleInput.nativeElement.value = ''
     $("#hymn-modal").modal("hide");
-  }
-
-  getId(id: string) {
-    this.id = id;
-    this.hymnsService.getHymn(id).subscribe(hymn => this.hymn = hymn)
   }
 }

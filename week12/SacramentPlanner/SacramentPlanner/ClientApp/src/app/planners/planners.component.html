@@ -5,27 +5,22 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Ward Name</th>
         <th>Presiding</th>
         <th>Conducting</th>
         <th>Opening Hymn</th>
         <th>Invocation</th>
         <!-- <th>Ward Business</th> -->
         <th>Sacrament Hymn</th>
-        <th>Sacrament Passing</th>
-        <th>Talks</th>
-        <th>Musical Number</th>
+        <!-- <th>Talks</th>
+        <th>Musical Number</th> -->
         <th>Closing Hymn</th>
         <th>Benediction</th>
-        <th>Dismissal Song</th>
         <th>Sacrament Date</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let planner of planners">
-        <!-- WARD NAME -->
-        <td class="plannerCells">{{planner.wardName}}</td>
         <!-- PRESIDING -->
         <td class="plannerCells">
           <ul>
@@ -64,11 +59,9 @@
             <li>{{planner.sacramentHymn.hymnNumber}}</li>
           </ul>
         </td>
-        <!-- SACRAMENT PASSING -->
-        <td class="plannerCells">{{planner.wardBusiness}}</td>
         <!-- TALKS -->
-        <td class="plannerCells">
-          <!-- <td class="plannerCells"> -->
+        <!-- <td class="plannerCells">
+          <td class="plannerCells">
           <ul *ngFor="let talk of planner.talks">
             <li>{{talk.talkTitle}}</li>
             <li>{{talk.speaker.firstName}}</li>
@@ -76,13 +69,13 @@
             <li>The time limit is {{talk.timeLimit}}</li>
           </ul>
         </td>
-        <!-- MUSICAL NUMBER -->
+        MUSICAL NUMBER
         <td class="plannerCells">
           <ul>
             <li>{{planner.musicalNumber.title}}</li>
             <li>Perform after talk # {{planner.musicalNumber.performAfterTalk}}</li>
           </ul>
-        </td>
+        </td> -->
         <!-- CLOSING HYMN -->
         <td class="plannerCells">
           <ul>
@@ -95,13 +88,6 @@
           <ul>
             <li>{{planner.benediction.firstName}}</li>
             <li>{{planner.benediction.lastName}}</li>
-          </ul>
-        </td>
-        <!-- DISMISSAL SONG -->
-        <td class="plannerCells">
-          <ul>
-            <li>{{planner.dismissalSong.title}}</li>
-            <li>{{planner.dismissalSong.hymnNumber}}</li>
           </ul>
         </td>
         <!-- SACRAMENT DATE -->
@@ -140,7 +126,7 @@
             [ngModel]="planner?.wardName">
         </div>
         <!-- PRESIDING -->
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="exampleInputEmail1">Presiding</label>
           <input type="text" class="form-control" placeholder="First name" min="1" required
             #presidingFirstName="ngModel" [ngModel]="planner?.presiding.firstName">
@@ -148,9 +134,25 @@
             [ngModel]="planner?.presiding.lastName">
           <input type="text" class="form-control" placeholder="Member title" min="1" required #presidingTitle="ngModel"
             [ngModel]="planner?.presiding.memberTitle">
+        </div> -->
+
+        <div class="form-group">
+          <label for="presiding">Presiding</label>
+          <select class="form-control" id="presiding">
+            <option value="0">==== Select Presiding ====</option>
+            <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
+          </select>
         </div>
+
         <!-- CONDUCTING -->
         <div class="form-group">
+          <label for="conducting">Presiding</label>
+          <select class="form-control" id="conducting">
+            <option value="0">==== Select Conducting ====</option>
+            <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
+          </select>
+        </div>
+        <!-- <div class="form-group">
           <label for="exampleInputEmail1">Conducting</label>
           <input type="text" class="form-control" placeholder="First name" min="1" required
             #conductingFirstName="ngModel" [ngModel]="planner?.conducting.firstName">
@@ -158,7 +160,7 @@
             [ngModel]="planner?.conducting.lastName">
           <input type="text" class="form-control" placeholder="Member title" min="1" required #conductingTitle="ngModel"
             [ngModel]="planner?.conducting.memberTitle">
-        </div>
+        </div> -->
         <!-- OPENING HYMN -->
         <div class="form-group">
           <label for="exampleInputEmail1">Opening hymn</label>
@@ -198,6 +200,16 @@
             [ngModel]="planner?.sacramentPassing">
         </div>
         <!-- TALKS -->
+        <label for="speaker">Talk</label>
+
+        <!-- <div class="form-group" *ngFor="let talk of planner.talks">
+          <select class="form-control" id="speaker">
+            <option value="0">==== Select Speaker ====</option>
+            <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
+          </select>
+        </div>
+
+        <button class="btn btn-danger" (click)="addTalk()">Add talk</button> -->
 
         <!-- error is somewhere here -->
         <!-- <div class="form-group" *ngFor="let talk of planner.talks">

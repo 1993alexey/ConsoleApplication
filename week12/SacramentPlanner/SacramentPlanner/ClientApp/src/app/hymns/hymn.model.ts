@@ -3,7 +3,7 @@ export class Hymn {
   public title: string
   public hymnNumber: number
 
-  constructor(hymnNumber: number, title: string) {
+  constructor(hymnNumber: number = 0, title: string = "") {
     this.hymnNumber = hymnNumber
     this.title = title
   }

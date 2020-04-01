@@ -2,6 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PlannerService } from './planner.service';
 import { Planner } from './planner.model';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Member } from '../members/member.model';
+import { Hymn } from '../hymns/hymn.model';
+import { MemberService } from '../members/member.service';
+import { HymnService } from '../hymns/hymn.service';
+import { Talk } from '../talk.model';
 declare var $: any;
 
 @Component({
@@ -29,10 +34,14 @@ export class PlannersComponent implements OnInit {
   faEdit = faEdit
   planner: Planner
   public planners: Planner[]
+  public members: Member[]
+  public hymns: Hymn[]
   id: string
   editMode = false
+  speakerCount = 0
 
-  constructor(private plannerService: PlannerService) { }
+
+  constructor(private plannerService: PlannerService, private memberService: MemberService, private hymnService: HymnService) { }
 
   ngOnInit() {
     this.plannerService.getPlanners().subscribe(planners => {
@@ -40,7 +49,11 @@ export class PlannersComponent implements OnInit {
       console.log(JSON.parse(JSON.stringify(this.planners)));
       // console.log(this.planners[1].presiding.firstName);
       this.sortPlanners()
+      console.log(this.planners[0].sacramentDate)
     })
+
+    this.memberService.getMembers().subscribe(members => this.members = members)
+    this.hymnService.getHymns().subscribe(hymns => this.hymns = hymns)
   }
 
   sortPlanners() {
@@ -97,5 +110,10 @@ export class PlannersComponent implements OnInit {
   editModeOn() {
     this.editMode = true
     console.log(this.editMode);
+  }
+
+  addTalk() {
+    const member = new Member()
+    this.planner.talks.push(new Talk(member))
   }
 }

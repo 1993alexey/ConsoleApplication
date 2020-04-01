@@ -7,7 +7,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { PlannersComponent } from './planners/planners.component';
 import { MembersComponent } from './members/members.component';
 import { HymnsComponent } from './hymns/hymns.component';
@@ -17,7 +16,6 @@ import { HymnsComponent } from './hymns/hymns.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    FetchDataComponent,
     PlannersComponent,
     MembersComponent,
     HymnsComponent
@@ -29,7 +27,6 @@ import { HymnsComponent } from './hymns/hymns.component';
     FontAwesomeModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'hymns', component: HymnsComponent },
       { path: 'members', component: MembersComponent },
       { path: 'planners', component: PlannersComponent },

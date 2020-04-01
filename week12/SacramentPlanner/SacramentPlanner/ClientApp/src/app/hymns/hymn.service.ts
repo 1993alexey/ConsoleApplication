@@ -32,7 +32,8 @@ export class HymnService {
   }
 
   updateHymn(hymn: Hymn): Observable<any> {
-    return this.http.put<Hymn>(this.hymnsUrl, hymn, this.httpOptions)
+    console.log(hymn)
+    return this.http.put<Hymn>(`${this.hymnsUrl}/${hymn.id}`, hymn, this.httpOptions)
       .pipe(catchError(this.handleError<any>()))
   }
 

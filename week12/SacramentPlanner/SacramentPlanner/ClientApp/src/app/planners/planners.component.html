@@ -150,7 +150,7 @@
         <br><br>
         <div class="form-group">
           <label for="presiding">Presiding</label>
-          <select class="form-control" id="presiding">
+          <select class="form-control" id="presiding" #presiding>
             <option value="0">==== Select Presiding ====</option>
             <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
           </select>
@@ -159,7 +159,7 @@
         <!-- CONDUCTING -->
         <div class="form-group">
           <label for="conducting">Conducting</label>
-          <select class="form-control" id="conducting">
+          <select class="form-control" id="conducting" #conducting>
             <option value="0">==== Select Conducting ====</option>
             <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
           </select>
@@ -177,7 +177,7 @@
         <!-- OPENING HYMN -->
         <div class="form-group">
           <label for="exampleInputEmail1">Opening hymn</label>
-          <select class="form-control" id="openingHymn">
+          <select class="form-control" id="openingHymn" #openingHymn>
             <option value="0">==== Select Opening Hymn ====</option>
             <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
           </select>
@@ -190,7 +190,7 @@
         <!-- INVOCATION -->
         <div class="form-group">
           <label for="exampleInputEmail1">Invocation</label>
-          <select class="form-control" id="conducting">
+          <select class="form-control" id="invocation" #invocation>
             <option value="0">==== Select Invocation ====</option>
             <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
           </select>
@@ -204,16 +204,16 @@
         </div>
 
         <!-- WARD BUSINESS -->
-        <!-- <div class="form-group">
-          <label for="exampleInputEmail1">Ward name</label>
-          <input type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName [ngModel]="planner?.wardName">
-        </div> -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ward Business</label>
+          <input type="text" class="form-control" placeholder="Is there any ward business?" min="1" required
+            #wardBusiness [(ngModel)]="onePlanner.wardBusiness">
+        </div>
 
         <!-- SACRAMENT HYMN -->
         <div class="form-group" *ngIf="onePlanner.sacramentPassing">
           <label for="exampleInputEmail1">Sacrament hymn</label>
-          <select class="form-control" id="sacramentHymn">
+          <select class="form-control" id="sacramentHymn" #sacramentHymn>
             <option value="0">==== Select Sacrament Hymn ====</option>
             <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
           </select>
@@ -223,7 +223,7 @@
         <!-- <label for="speaker">Talk</label> -->
 
         <!-- <div class="form-group" *ngFor="let talk of planner.talks">
-          <select class="form-control" id="speaker">
+          <select class="form-control" id="speaker" #speaker>
             <option value="0">==== Select Speaker ====</option>
             <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
           </select>
@@ -257,7 +257,7 @@
         <!-- CLOSING HYMN -->
         <div class="form-group">
           <label for="exampleInputEmail1">Closing hymn</label>
-          <select class="form-control" id="closingHymn">
+          <select class="form-control" id="closingHymn" #closingHymn>
             <option value="0">==== Select Closing Hymn ====</option>
             <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
           </select>
@@ -266,7 +266,7 @@
         <!-- BENEDICTION -->
         <div class="form-group">
           <label for="exampleInputEmail1">Benediction</label>
-          <select class="form-control" id="conducting">
+          <select class="form-control" id="conducting" #benediction>
             <option value="0">==== Select Benediction ====</option>
             <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
           </select>
@@ -281,7 +281,7 @@
         <!-- DISMISSAL SONG -->
         <div class="form-group">
           <label for="exampleInputEmail1">Dismissal song</label>
-          <select class="form-control" id="dismissalSong">
+          <select class="form-control" id="dismissalSong" #dismissalSong>
             <option value="0">==== Select Dismissal Song ====</option>
             <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
           </select>
@@ -303,8 +303,31 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="create({lastName: lastName.value, firstName: firstName.value,
-          memberTitle: memberTitle.value}); hideModal()" *ngIf="!editMode">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="create(
+          {
+            wardName: wardName.value,
+            presiding: presiding.value,
+            conducting: conducting.value,
+            openingHymn: openingHymn.value,
+            invocation: invocation.value,
+            wardBusiness: wardBusiness.value,
+            sacramentHymn: sacramentHymn.value,
+            sacramentPassing: sacramentPassing.value,
+            closingHymn: closingHymn.value,
+            benediction: benediction.value,
+            dismissalSong: dismissalSong.value,
+            sacramentDate: date.value
+          }
+
+        ); hideModal()" *ngIf="!editMode">Save changes</button>
+
+        <!-- add to the create function. How to bind values??? idk -->
+        <!--talks.speaker: speaker.value,
+            talks.talkTitle : talkTitle,
+            talks.talkLimit : talkLimit,
+            musicalNumber.musicalNumberTitle : musicalNumberTitle.value,
+            musicalNumber.performAfterTalk : afterTalk.value, -->
+
         <button type="button" class="btn btn-primary" (click)="edit(); hideModal()" *ngIf="editMode">Save
           changes</button>
       </div>

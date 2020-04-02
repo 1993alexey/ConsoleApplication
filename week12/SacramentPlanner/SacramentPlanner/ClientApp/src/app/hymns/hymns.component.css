@@ -11,10 +11,6 @@ tbody > tr:hover .action-icons {
   display: inherit;
 }
 
-#edit {
-
-}
-
 #delete {
   margin-right: 20px;
 }

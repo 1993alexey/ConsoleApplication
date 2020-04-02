@@ -91,20 +91,6 @@ export class PlannersComponent implements OnInit {
 
   hideModal() {
     this.onePlanner = new Planner()
-    // this.wardNameInput.nativeElement.value = ''
-    // this.presidingInput.nativeElement.value = ''
-    // this.conductingInput.nativeElement.value = ''
-    // this.openingHymnInput.nativeElement.value = ''
-    // this.invocationInput.nativeElement.value = ''
-    // this.wardBusinessInput.nativeElement.value = ''
-    // this.sacramentHymnInput.nativeElement.value = ''
-    // this.sacramentPassingInput.nativeElement.value = ''
-    // this.TalksInput.nativeElement.value = ''
-    // this.musicalNumberInput.nativeElement.value = ''
-    // this.closingHymnInput.nativeElement.value = ''
-    // this.benedictionInput.nativeElement.value = ''
-    // this.dismissalSongInput.nativeElement.value = ''
-    // this.sacramentDateInput.nativeElement.value = ''
     $("#planner-modal").modal("hide");
   }
 
@@ -137,5 +123,9 @@ export class PlannersComponent implements OnInit {
 
   getHymn(id: string): Hymn {
     return this.hymns.find(hymn => hymn.id == id)
+  }
+
+  openPlanner(id: string) {
+    console.log('Hello')
   }
 }

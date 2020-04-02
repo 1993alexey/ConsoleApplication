@@ -5,7 +5,7 @@ export class Talk {
   public speaker: Member
   public timeLimit: number
 
-  constructor(speaker: Member = null, timeLimit: number = 0, talkTitle: string = "") {
+  constructor(speaker: Member = null, timeLimit?: number, talkTitle: string = "") {
     this.talkTitle = talkTitle
     this.speaker = speaker ? speaker : new Member()
     this.timeLimit = timeLimit

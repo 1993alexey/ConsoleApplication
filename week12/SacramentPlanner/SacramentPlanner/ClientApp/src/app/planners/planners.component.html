@@ -9,18 +9,15 @@
         <th>Conducting</th>
         <th>Opening Hymn</th>
         <th>Invocation</th>
-        <!-- <th>Ward Business</th> -->
         <th>Sacrament Hymn</th>
-        <!-- <th>Talks</th>
-        <th>Musical Number</th> -->
         <th>Closing Hymn</th>
         <th>Benediction</th>
         <th>Sacrament Date</th>
-        <th></th>
+        <th id="number-cell"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let planner of planners">
+      <tr *ngFor="let planner of planners" (click)="openPlanner();">
         <!-- PRESIDING -->
         <td class="plannerCells">
           <ul>
@@ -50,8 +47,6 @@
             <li>{{planner.invocation.lastName}}</li>
           </ul>
         </td>
-        <!-- WARD BUSINESS -->
-        <!-- <td class="plannerCells">{{planner.wardBusiness}}</td> -->
         <!-- SACRAMENT HYMN -->
         <td class="plannerCells">
           <ul>
@@ -59,23 +54,6 @@
             <li>{{planner.sacramentHymn.hymnNumber}}</li>
           </ul>
         </td>
-        <!-- TALKS -->
-        <!-- <td class="plannerCells">
-          <td class="plannerCells">
-          <ul *ngFor="let talk of planner.talks">
-            <li>{{talk.talkTitle}}</li>
-            <li>{{talk.speaker.firstName}}</li>
-            <li>{{talk.speaker.lastName}}</li>
-            <li>The time limit is {{talk.timeLimit}}</li>
-          </ul>
-        </td>
-        MUSICAL NUMBER
-        <td class="plannerCells">
-          <ul>
-            <li>{{planner.musicalNumber.title}}</li>
-            <li>Perform after talk # {{planner.musicalNumber.performAfterTalk}}</li>
-          </ul>
-        </td> -->
         <!-- CLOSING HYMN -->
         <td class="plannerCells">
           <ul>
@@ -84,7 +62,7 @@
           </ul>
         </td>
         <!-- BENEDICTION -->
-        <td class="plannerCells">
+        <td class="plannerCells" (click)="$event.stopPropagation(); false">
           <ul>
             <li>{{planner.benediction.firstName}}</li>
             <li>{{planner.benediction.lastName}}</li>
@@ -94,9 +72,9 @@
         <td class="plannerCells">{{planner.sacramentDate | date :  "shortDate"}}</td>
         <td>
           <div class="action-icons">
-            <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(planner.id)"></fa-icon>
+            <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(planner.id); $event.stopPropagation()"></fa-icon>
             <fa-icon id="edit" [icon]="faEdit" data-toggle="modal" data-target="#planner-modal" data-backdrop="static"
-              (click)="showModal(planner)">
+              (click)="showModal(planner); $event.stopPropagation()">
             </fa-icon>
           </div>
         </td>
@@ -188,7 +166,7 @@
         </div>
 
         <!-- TALKS -->
-        <label for="speaker">Talks</label>
+        <label for="speaker" id="talks-label">Talks</label>
         <div class="form-group" *ngFor="let talk of onePlanner.talks; let i = index">
           <select class="form-control speaker" #speaker>
             <option value="0">==== Select Speaker ====</option>
@@ -197,17 +175,17 @@
           </select>
           <input type="text" class="form-control" placeholder="Talk title" min="1" required #talkTitle
             [(ngModel)]="talk.talkTitle">
-          <input type="text" class="form-control" placeholder="Talk time limit" min="1" required #talkLimit
+          <input type="number" class="form-control" placeholder="Talk time limit" min="1" required #talkLimit
             [(ngModel)]="talk.timeLimit">
         </div>
-        <button class="btn btn-success" (click)="addTalk()">Add talk</button>
+        <button class="btn btn-success talk-btn" (click)="addTalk()">Add talk</button>
 
         <!-- MUSICAL NUMBER -->
         <div class="form-group">
           <label for="exampleInputEmail1">Musical number</label>
           <input type="text" class="form-control" placeholder="Musical number title" min="1" required
             #musicalNumberTitle [(ngModel)]="onePlanner.musicalNumber.title">
-          <input type="text" class="form-control" placeholder="Perfomed after talk #" min="1" required #afterTalk
+          <input type="number" class="form-control" placeholder="Perfomed after talk #" min="1" required #afterTalk
             [(ngModel)]="onePlanner.musicalNumber.performAfterTalk">
         </div>
 

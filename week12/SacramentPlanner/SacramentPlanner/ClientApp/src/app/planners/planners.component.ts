@@ -15,20 +15,20 @@ declare var $: any;
   styleUrls: ['./planners.component.css']
 })
 export class PlannersComponent implements OnInit {
-  // @ViewChild('wardName', { static: true }) wardNameInput: any;
-  // @ViewChild('presiding', { static: true }) presidingInput: any;
-  // @ViewChild('conducting', { static: true }) conductingInput: any;
-  // @ViewChild('openingHymn', { static: true }) openingHymnInput: any;
-  // @ViewChild('invocation', { static: true }) invocationInput: any;
-  // @ViewChild('wardBusiness', { static: true }) wardBusinessInput: any;
-  // @ViewChild('sacramentHymn', { static: true }) sacramentHymnInput: any;
-  // @ViewChild('sacramentPassing', { static: true }) sacramentPassingInput: any;
-  // @ViewChild('Talks', { static: true }) TalksInput: any;
-  // @ViewChild('musicalNumber', { static: true }) musicalNumberInput: any;
-  // @ViewChild('closingHymn', { static: true }) closingHymnInput: any;
-  // @ViewChild('benediction', { static: true }) benedictionInput: any;
-  // @ViewChild('dismissalSong', { static: true }) dismissalSongInput: any;
-  // @ViewChild('sacramentDate', { static: true }) sacramentDateInput: any;
+  @ViewChild('wardName', { static: true }) wardNameInput: any;
+  @ViewChild('presiding', { static: true }) presidingInput: any;
+  @ViewChild('conducting', { static: true }) conductingInput: any;
+  @ViewChild('openingHymn', { static: true }) openingHymnInput: any;
+  @ViewChild('invocation', { static: true }) invocationInput: any;
+  @ViewChild('wardBusiness', { static: true }) wardBusinessInput: any;
+  @ViewChild('sacramentHymn', { static: true }) sacramentHymnInput: any;
+  @ViewChild('sacramentPassing', { static: true }) sacramentPassingInput: any;
+  @ViewChild('speaker', { static: true }) speakerInput: any;
+  @ViewChild('musicalNumber', { static: true }) musicalNumberInput: any;
+  @ViewChild('closingHymn', { static: true }) closingHymnInput: any;
+  @ViewChild('benediction', { static: true }) benedictionInput: any;
+  @ViewChild('dismissalSong', { static: true }) dismissalSongInput: any;
+  @ViewChild('sacramentDate', { static: true }) sacramentDateInput: any;
 
   faTrashAlt = faTrashAlt
   faEdit = faEdit
@@ -58,6 +58,8 @@ export class PlannersComponent implements OnInit {
   }
 
   create(planner: Planner) {
+    this.slepiPirozhok()
+
     this.plannerService.addPlanner(planner)
       .subscribe(newPlanner => {
         this.planners.push(newPlanner)
@@ -106,7 +108,33 @@ export class PlannersComponent implements OnInit {
   }
 
   addTalk() {
-    const member = new Member()
-    this.onePlanner.talks.push(new Talk(member))
+    this.onePlanner.talks.push(new Talk())
+  }
+
+  slepiPirozhok() {
+    this.onePlanner.presiding = this.getMember(this.presidingInput.nativeElement.value)
+    this.onePlanner.conducting = this.getMember(this.conductingInput.nativeElement.value)
+    this.onePlanner.openingHymn = this.getHymn(this.openingHymnInput.nativeElement.value)
+    this.onePlanner.invocation = this.getMember(this.invocationInput.nativeElement.value)
+    this.onePlanner.closingHymn = this.getHymn(this.closingHymnInput.nativeElement.value)
+    this.onePlanner.benediction = this.getMember(this.benedictionInput.nativeElement.value)
+    this.onePlanner.dismissalSong = this.getHymn(this.dismissalSongInput.nativeElement.value)
+
+    if (this.onePlanner.sacramentPassing)
+      this.onePlanner.sacramentHymn = this.getHymn(document.getElementById('sacramentHymn').value)
+
+    const speakers = document.getElementsByClassName('speaker')
+    for (let i = 0; i < this.onePlanner.talks.length; i++) {
+      const talk = this.onePlanner.talks[i]
+      talk.speaker = this.getMember(speakers[i].value)
+    }
+  }
+
+  getMember(id: string): Member {
+    return this.members.find(member => member.id == id)
+  }
+
+  getHymn(id: string): Hymn {
+    return this.hymns.find(hymn => hymn.id == id)
   }
 }

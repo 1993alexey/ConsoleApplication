@@ -13,5 +13,7 @@ namespace SacramentPlanner.Models
             Speaker = speaker;
             TalkTitle = talkTitle;
         }
+
+        public TalkModel(){}
     }
 }

@@ -11,5 +11,7 @@ namespace SacramentPlanner.Models
             Title = title;
             PerformAfterTalk = afterTalk;
         }
+
+        public MusicalNumberModel() {}
     }
 }

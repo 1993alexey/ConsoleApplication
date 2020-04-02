@@ -49,7 +49,7 @@ namespace SacramentPlanner.Models
             Invocation = invocation;
             WardBusiness = wardBusiness;
             SacramentHymn = sacramentHymn;
-            SacramentPassing = SacramentPassing;
+            SacramentPassing = sacramentPassing;
             Talks = talks;
             MusicalNumber = musicalNumber;
             ClosingHymn = closingHymn;

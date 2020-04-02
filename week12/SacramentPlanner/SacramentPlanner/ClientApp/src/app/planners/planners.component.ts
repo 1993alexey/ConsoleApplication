@@ -107,6 +107,6 @@ export class PlannersComponent implements OnInit {
 
   addTalk() {
     const member = new Member()
-    this.planner.talks.push(new Talk(member))
+    this.onePlanner.talks.push(new Talk(member))
   }
 }

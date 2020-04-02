@@ -112,8 +112,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <!-- fix the modal title -->
-        <h5 class="modal-title" id="PlannerModalLabel" *ngIf="!editMode">Add Planner</h5>
-        <h5 class="modal-title" id="PlannerModalLabel" *ngIf="editMode">Edit Planner</h5>
+        <h5 class="modal-title" id="PlannerModalLabel">{{editMode ? 'Edit Planner' : 'Add Planner'}}</h5>
         <button type="button" class="close" (click)="hideModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -137,6 +136,18 @@
             [ngModel]="planner?.presiding.memberTitle">
         </div> -->
 
+        <!-- Ward Business and Sacrament passing -->
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="onePlanner.wardBusiness">Ward Business
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="onePlanner.sacramentPassing">Pass Sacrament
+          </label>
+        </div>
+        <br><br>
         <div class="form-group">
           <label for="presiding">Presiding</label>
           <select class="form-control" id="presiding">
@@ -200,19 +211,12 @@
         </div> -->
 
         <!-- SACRAMENT HYMN -->
-        <div class="form-group">
+        <div class="form-group" *ngIf="onePlanner.sacramentPassing">
           <label for="exampleInputEmail1">Sacrament hymn</label>
           <select class="form-control" id="sacramentHymn">
             <option value="0">==== Select Sacrament Hymn ====</option>
             <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
           </select>
-        </div>
-
-        <!-- SACRAMENT PASSING -->
-        <div class="form-group">
-          <label for="exampleInputEmail1">Sacrament passing</label>
-          <input type="text" class="form-control" placeholder="Passing sacrament?" min="1" required #sacramentPassing
-            [(ngModel)]="onePlanner.sacramentPassing">
         </div>
 
         <!-- TALKS -->
@@ -242,13 +246,13 @@
 
         <!-- MUSICAL NUMBER -->
         <!-- HAVE A TROUBLE WITH THIS -->
-        <!-- <div class="form-group">
+        <div class="form-group">
           <label for="exampleInputEmail1">Musical number</label>
           <input type="text" class="form-control" placeholder="Musical number title" min="1" required
             #musicalNumberTitle [(ngModel)]="onePlanner.musicalNumber.title">
           <input type="text" class="form-control" placeholder="Perfomed after talk #" min="1" required #afterTalk
             [(ngModel)]="onePlanner.musicalNumber.performAfterTalk">
-        </div> -->
+        </div>
 
         <!-- CLOSING HYMN -->
         <div class="form-group">
@@ -291,7 +295,8 @@
         <div class="form-group">
           <label for="exampleInputEmail1">Sacrament date</label>
           <input type="date" class="form-control" placeholder="Enter sacrament meeting date" min="1" required #wardName
-            [(ngModel)]="onePlanner.sacramentDate">
+            [ngModel]="onePlanner.sacramentDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="onePlanner.sacramentDate = $event">
         </div>
 
       </div>

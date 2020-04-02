@@ -69,7 +69,8 @@ export class PlannersComponent implements OnInit {
     this.plannerService.getPlanners().subscribe(planners => this.planners = planners)
   }
 
-  edit(planner: Planner) {
+  edit() {
+    this.slepiPirozhok()
     this.plannerService.updatePlanner(this.onePlanner).subscribe()
   }
 

@@ -108,12 +108,12 @@ export class PlannersComponent implements OnInit {
     this.onePlanner.dismissalSong = this.getHymn(this.dismissalSongInput.nativeElement.value)
 
     if (this.onePlanner.sacramentPassing)
-      this.onePlanner.sacramentHymn = this.getHymn(document.getElementById('sacramentHymn').value)
+      this.onePlanner.sacramentHymn = this.getHymn((<HTMLInputElement>document.getElementById('sacramentHymn')).value)
 
     const speakers = document.getElementsByClassName('speaker')
     for (let i = 0; i < this.onePlanner.talks.length; i++) {
       const talk = this.onePlanner.talks[i]
-      talk.speaker = this.getMember(speakers[i].value)
+      talk.speaker = this.getMember((<HTMLInputElement>speakers[i]).value)
     }
   }
 

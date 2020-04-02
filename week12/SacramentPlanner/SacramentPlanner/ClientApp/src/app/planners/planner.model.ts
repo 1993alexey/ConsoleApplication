@@ -5,59 +5,59 @@ import { MusicalNumber } from "../musicalNumber.model";
 
 
 export class Planner {
-  public id: string
-  public wardName: string
-  public presiding: Member
-  public conducting: Member
-  public openingHymn: Hymn
-  public invocation: Member
-  public wardBusiness: boolean //string
-  public sacramentHymn: Hymn
-  public sacramentPassing: boolean
-  public talks: Talk[]
-  public musicalNumber: MusicalNumber
-  public closingHymn: Hymn
-  public benediction: Member
-  public dismissalSong: Hymn
-  public sacramentDate: Date
+    public id: string
+    public wardName: string
+    public presiding: Member
+    public conducting: Member
+    public openingHymn: Hymn
+    public invocation: Member
+    public wardBusiness: boolean //string
+    public sacramentHymn: Hymn
+    public sacramentPassing: boolean
+    public talks: Talk[]
+    public musicalNumber: MusicalNumber
+    public closingHymn: Hymn
+    public benediction: Member
+    public dismissalSong: Hymn
+    public sacramentDate: Date
 
-  constructor(
-    wardName: string,
-    presiding: Member,
-    conducting: Member,
-    openingHymn: Hymn,
-    invocation: Member,
-    wardBusiness: boolean, // string,
-    sacramentHymn: Hymn,
-    sacramentPassing: boolean,
-    talks: Talk[],
-    musicalNumber: MusicalNumber,
-    closingHymn: Hymn,
-    benediction: Member,
-    dismissalSong: Hymn,
-    sacramentDate: Date
-  ) {
-    this.wardName = wardName
-    this.presiding = presiding
-    this.conducting = conducting
-    this.openingHymn = openingHymn
-    this.invocation = invocation
-    this.wardBusiness = wardBusiness
-    this.sacramentHymn = sacramentHymn
-    this.sacramentPassing = sacramentPassing
-    this.talks = talks
-    this.musicalNumber = musicalNumber
-    this.closingHymn = closingHymn
-    this.benediction = benediction
-    this.dismissalSong = dismissalSong
-    this.sacramentDate = sacramentDate
-  }
+    constructor(
+        wardName: string = "",
+        presiding: Member,
+        conducting: Member,
+        openingHymn: Hymn,
+        invocation: Member,
+        wardBusiness: boolean = false, // string,
+        sacramentHymn: Hymn,
+        sacramentPassing: boolean = false,
+        talks: Talk[],
+        musicalNumber: MusicalNumber,
+        closingHymn: Hymn,
+        benediction: Member,
+        dismissalSong: Hymn,
+        sacramentDate: Date
+    ) {
+        this.wardName = wardName
+        this.presiding = presiding
+        this.conducting = conducting
+        this.openingHymn = openingHymn
+        this.invocation = invocation
+        this.wardBusiness = wardBusiness
+        this.sacramentHymn = sacramentHymn
+        this.sacramentPassing = sacramentPassing
+        this.talks = talks
+        this.musicalNumber = musicalNumber
+        this.closingHymn = closingHymn
+        this.benediction = benediction
+        this.dismissalSong = dismissalSong
+        this.sacramentDate = sacramentDate
+    }
 
-  // get sacramentDate(): Date {
-  //   return this.sacramentDate
-  // }
+    // get sacramentDate(): Date {
+    //   return this.sacramentDate
+    // }
 
-  // set sacramentDate(sacramentDate: Date) {
-  //   this.sacramentDate = sacramentDate
-  // }
+    // set sacramentDate(sacramentDate: Date) {
+    //   this.sacramentDate = sacramentDate
+    // }
 }

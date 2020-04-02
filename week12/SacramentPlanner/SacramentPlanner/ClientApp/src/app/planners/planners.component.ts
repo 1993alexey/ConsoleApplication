@@ -32,23 +32,20 @@ export class PlannersComponent implements OnInit {
 
   faTrashAlt = faTrashAlt
   faEdit = faEdit
-  planner: Planner
   public planners: Planner[]
+  onePlanner = new Planner()
   public members: Member[]
   public hymns: Hymn[]
-  id: string
   editMode = false
-  speakerCount = 0
-
 
   constructor(private plannerService: PlannerService, private memberService: MemberService, private hymnService: HymnService) { }
 
   ngOnInit() {
     this.plannerService.getPlanners().subscribe(planners => {
       this.planners = planners
-      console.log(JSON.parse(JSON.stringify(this.planners)));
-      // console.log(this.planners[1].presiding.firstName);
       this.sortPlanners()
+
+      console.log(JSON.parse(JSON.stringify(this.planners)));
       console.log(this.planners[0].sacramentDate)
     })
 
@@ -71,7 +68,7 @@ export class PlannersComponent implements OnInit {
   }
 
   edit(planner: Planner) {
-
+    this.plannerService.updatePlanner(this.onePlanner).subscribe()
   }
 
   delete(id: string) {
@@ -79,7 +76,18 @@ export class PlannersComponent implements OnInit {
     this.plannerService.deletePlanner(id).subscribe()
   }
 
+  showModal(planner: Planner) {
+    if (!planner)
+      this.onePlanner = new Planner()
+    else
+      this.onePlanner = planner
+
+    this.editMode = planner ? true : false
+    $("#planner-modal").modal("show");
+  }
+
   hideModal() {
+    this.onePlanner = new Planner()
     // this.wardNameInput.nativeElement.value = ''
     // this.presidingInput.nativeElement.value = ''
     // this.conductingInput.nativeElement.value = ''
@@ -94,22 +102,7 @@ export class PlannersComponent implements OnInit {
     // this.benedictionInput.nativeElement.value = ''
     // this.dismissalSongInput.nativeElement.value = ''
     // this.sacramentDateInput.nativeElement.value = ''
-    $("#member-modal").modal("hide");
-  }
-
-  getId(id: string) {
-    this.id = id;
-    this.plannerService.getPlanner(id).subscribe(planner => this.planner = planner)
-  }
-
-  addModeOn() {
-    this.editMode = false
-    console.log(this.editMode);
-  }
-
-  editModeOn() {
-    this.editMode = true
-    console.log(this.editMode);
+    $("#planner-modal").modal("hide");
   }
 
   addTalk() {

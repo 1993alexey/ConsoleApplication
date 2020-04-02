@@ -2,11 +2,6 @@ li {
   list-style: none;
 }
 
-.table td,
-.table th {
-  /* vertical-align: middle !important; */
-}
-
 ul {
   padding-left: 0px;
 }

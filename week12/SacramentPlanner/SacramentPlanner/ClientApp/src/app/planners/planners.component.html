@@ -1,5 +1,5 @@
 <button class="btn btn-success" data-toggle="modal" data-target="#planner-modal" data-backdrop="static"
-  (click)="addModeOn()">Add</button>
+  (click)="showModal()">Add</button>
 <br><br>
 <div class="table-responsive">
   <table class="table">
@@ -95,8 +95,8 @@
         <td>
           <div class="action-icons">
             <fa-icon id="delete" [icon]="faTrashAlt" (click)="delete(planner.id)"></fa-icon>
-            <fa-icon id="edit" (click)="editModeOn()" (click)="getId(planner.id)" [icon]="faEdit" data-toggle="modal"
-              data-target="#planner-modal" data-backdrop="static">
+            <fa-icon id="edit" [icon]="faEdit" data-toggle="modal" data-target="#planner-modal" data-backdrop="static"
+              (click)="showModal(planner)">
             </fa-icon>
           </div>
         </td>
@@ -112,8 +112,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <!-- fix the modal title -->
-        <h5 class="modal-title" id="PlannerModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="PlannerModalLabel" *ngIf="!editMode">Add Planner</h5>
+        <h5 class="modal-title" id="PlannerModalLabel" *ngIf="editMode">Edit Planner</h5>
+        <button type="button" class="close" (click)="hideModal()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -122,17 +123,17 @@
         <!-- WARD NAME -->
         <div class="form-group">
           <label for="exampleInputEmail1">Ward name</label>
-          <input type="text" class="form-control" placeholder="Ward name" min="1" required #wardName="ngModel"
-            [ngModel]="planner?.wardName">
+          <input type="text" class="form-control" placeholder="Ward name" min="1" required #wardName
+            [(ngModel)]="onePlanner.wardName">
         </div>
         <!-- PRESIDING -->
         <!-- <div class="form-group">
           <label for="exampleInputEmail1">Presiding</label>
           <input type="text" class="form-control" placeholder="First name" min="1" required
-            #presidingFirstName="ngModel" [ngModel]="planner?.presiding.firstName">
-          <input type="text" class="form-control" placeholder="Last name" min="1" required #presidingLastName="ngModel"
+            #presidingFirstName [ngModel]="planner?.presiding.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required #presidingLastName
             [ngModel]="planner?.presiding.lastName">
-          <input type="text" class="form-control" placeholder="Member title" min="1" required #presidingTitle="ngModel"
+          <input type="text" class="form-control" placeholder="Member title" min="1" required #presidingTitle
             [ngModel]="planner?.presiding.memberTitle">
         </div> -->
 
@@ -146,7 +147,7 @@
 
         <!-- CONDUCTING -->
         <div class="form-group">
-          <label for="conducting">Presiding</label>
+          <label for="conducting">Conducting</label>
           <select class="form-control" id="conducting">
             <option value="0">==== Select Conducting ====</option>
             <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
@@ -155,52 +156,67 @@
         <!-- <div class="form-group">
           <label for="exampleInputEmail1">Conducting</label>
           <input type="text" class="form-control" placeholder="First name" min="1" required
-            #conductingFirstName="ngModel" [ngModel]="planner?.conducting.firstName">
-          <input type="text" class="form-control" placeholder="Last name" min="1" required #conductingLastName="ngModel"
+            #conductingFirstName [ngModel]="planner?.conducting.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required #conductingLastName
             [ngModel]="planner?.conducting.lastName">
-          <input type="text" class="form-control" placeholder="Member title" min="1" required #conductingTitle="ngModel"
+          <input type="text" class="form-control" placeholder="Member title" min="1" required #conductingTitle
             [ngModel]="planner?.conducting.memberTitle">
         </div> -->
+
         <!-- OPENING HYMN -->
         <div class="form-group">
           <label for="exampleInputEmail1">Opening hymn</label>
-          <input type="text" class="form-control" placeholder="Hymn title" min="1" required #openingHymnTitle="ngModel"
+          <select class="form-control" id="openingHymn">
+            <option value="0">==== Select Opening Hymn ====</option>
+            <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
+          </select>
+          <!-- <input type="text" class="form-control" placeholder="Hymn title" min="1" required #openingHymnTitle
             [ngModel]="planner?.openingHymn.title">
-          <input type="text" class="form-control" placeholder="Hymn number" min="1" required
-            #openingHymnNumber="ngModel" [ngModel]="planner?.openingHymn.hymnNumber">
+          <input type="text" class="form-control" placeholder="Hymn number" min="1" required #openingHymnNumber
+            [ngModel]="planner?.openingHymn.hymnNumber"> -->
         </div>
+
         <!-- INVOCATION -->
         <div class="form-group">
           <label for="exampleInputEmail1">Invocation</label>
-          <input type="text" class="form-control" placeholder="First name" min="1" required
-            #invocationFirstName="ngModel" [ngModel]="planner?.invocation.firstName">
-          <input type="text" class="form-control" placeholder="Last name" min="1" required #invocationLastName="ngModel"
+          <select class="form-control" id="conducting">
+            <option value="0">==== Select Invocation ====</option>
+            <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
+          </select>
+          <!-- <label for="conducting">Presiding</label> -->
+          <!-- <input type="text" class="form-control" placeholder="First name" min="1" required
+            #invocationFirstName [ngModel]="planner?.invocation.firstName">
+          <input type="text" class="form-control" placeholder="Last name" min="1" required #invocationLastName
             [ngModel]="planner?.invocation.lastName">
-          <input type="text" class="form-control" placeholder="Member title" min="1" required #invocationTitle="ngModel"
-            [ngModel]="planner?.invocation.memberTitle">
+          <input type="text" class="form-control" placeholder="Member title" min="1" required #invocationTitle
+            [ngModel]="planner?.invocation.memberTitle"> -->
         </div>
+
         <!-- WARD BUSINESS -->
         <!-- <div class="form-group">
           <label for="exampleInputEmail1">Ward name</label>
           <input type="text" class="form-control" placeholder="Enter ward name" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.wardName">
+            #wardName [ngModel]="planner?.wardName">
         </div> -->
+
         <!-- SACRAMENT HYMN -->
         <div class="form-group">
           <label for="exampleInputEmail1">Sacrament hymn</label>
-          <input type="text" class="form-control" placeholder="Hymn title" min="1" required
-            #sacramentHymnTitle="ngModel" [ngModel]="planner?.sacramentHymn.title">
-          <input type="text" class="form-control" placeholder="Hymn number" min="1" required
-            #sacramentHymnNumber="ngModel" [ngModel]="planner?.sacramentHymn.hymnNumber">
+          <select class="form-control" id="sacramentHymn">
+            <option value="0">==== Select Sacrament Hymn ====</option>
+            <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
+          </select>
         </div>
+
         <!-- SACRAMENT PASSING -->
         <div class="form-group">
           <label for="exampleInputEmail1">Sacrament passing</label>
-          <input type="text" class="form-control" placeholder="Passing sacrament?" min="1" required #wardName="ngModel"
-            [ngModel]="planner?.sacramentPassing">
+          <input type="text" class="form-control" placeholder="Passing sacrament?" min="1" required #sacramentPassing
+            [(ngModel)]="onePlanner.sacramentPassing">
         </div>
+
         <!-- TALKS -->
-        <label for="speaker">Talk</label>
+        <!-- <label for="speaker">Talk</label> -->
 
         <!-- <div class="form-group" *ngFor="let talk of planner.talks">
           <select class="form-control" id="speaker">
@@ -214,67 +230,78 @@
         <!-- error is somewhere here -->
         <!-- <div class="form-group" *ngFor="let talk of planner.talks">
           <label for="exampleInputEmail1">Talk</label>
-          <input type="text" class="form-control" placeholder="Talk title" min="1" required #talkTitle="ngModel"
+          <input type="text" class="form-control" placeholder="Talk title" min="1" required #talkTitle
             [ngModel]="talk.talkTitle">
           <input type="text" class="form-control" placeholder="Talk first name" min="1" required
-            #talkFirstName="ngModel" [ngModel]="talk.speaker.firstName">
-          <input type="text" class="form-control" placeholder="Talk last name" min="1" required #talkLastName="ngModel"
+            #talkFirstName [ngModel]="talk.speaker.firstName">
+          <input type="text" class="form-control" placeholder="Talk last name" min="1" required #talkLastName
             [ngModel]="talk.speaker.lastName">
-          <input type="text" class="form-control" placeholder="Talk time limit" min="1" required #talkLimit="ngModel"
+          <input type="text" class="form-control" placeholder="Talk time limit" min="1" required #talkLimit
             [ngModel]="talk.timeLimit">
         </div> -->
 
         <!-- MUSICAL NUMBER -->
-        <div class="form-group">
+        <!-- HAVE A TROUBLE WITH THIS -->
+        <!-- <div class="form-group">
           <label for="exampleInputEmail1">Musical number</label>
           <input type="text" class="form-control" placeholder="Musical number title" min="1" required
-            #musicalNumberTitle="ngModel" [ngModel]="planner?.musicalNumber.title">
-          <input type="text" class="form-control" placeholder="Perfomed after talk #" min="1" required
-            #afterTalk="ngModel" [ngModel]="planner?.musicalNumber.performAfterTalk">
-        </div>
+            #musicalNumberTitle [(ngModel)]="onePlanner.musicalNumber.title">
+          <input type="text" class="form-control" placeholder="Perfomed after talk #" min="1" required #afterTalk
+            [(ngModel)]="onePlanner.musicalNumber.performAfterTalk">
+        </div> -->
+
         <!-- CLOSING HYMN -->
         <div class="form-group">
           <label for="exampleInputEmail1">Closing hymn</label>
-          <input type="text" class="form-control" placeholder="Closing hymn title" min="1" required
-            #closingHymnTitle="ngModel" [ngModel]="planner?.closingHymn.title">
-          <input type="text" class="form-control" placeholder="Closing hymn title" min="1" required
-            #closingHymnNumber="ngModel" [ngModel]="planner?.closingHymn.hymnNumber">
+          <select class="form-control" id="closingHymn">
+            <option value="0">==== Select Closing Hymn ====</option>
+            <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
+          </select>
         </div>
+
         <!-- BENEDICTION -->
         <div class="form-group">
           <label for="exampleInputEmail1">Benediction</label>
-          <input type="text" class="form-control" placeholder="First name" min="1" required
-            #benedictionFirstName="ngModel" [ngModel]="planner?.benediction.firstName">
+          <select class="form-control" id="conducting">
+            <option value="0">==== Select Benediction ====</option>
+            <option *ngFor="let member of members" [value]="member.id">{{member.firstName}} {{member.lastName}}</option>
+          </select>
+          <!-- <input type="text" class="form-control" placeholder="First name" min="1" required
+            #benedictionFirstName [ngModel]="planner?.benediction.firstName">
           <input type="text" class="form-control" placeholder="Last name" min="1" required
-            #benedictionLastName="ngModel" [ngModel]="planner?.benediction.lastName">
+            #benedictionLastName [ngModel]="planner?.benediction.lastName">
           <input type="text" class="form-control" placeholder="Member title" min="1" required
-            #benedictionTitle="ngModel" [ngModel]="planner?.benediction.memberTitle">
+            #benedictionTitle [ngModel]="planner?.benediction.memberTitle"> -->
         </div>
+
         <!-- DISMISSAL SONG -->
         <div class="form-group">
           <label for="exampleInputEmail1">Dismissal song</label>
-          <input type="text" class="form-control" placeholder="Dismissal song title" min="1" required
-            #dismissalSongTitle="ngModel" [ngModel]="planner?.dismissalSong.title">
+          <select class="form-control" id="dismissalSong">
+            <option value="0">==== Select Dismissal Song ====</option>
+            <option *ngFor="let hymn of hymns" [value]="hymn.id">#{{hymn.hymnNumber}} - {{hymn.title}}</option>
+          </select>
+          <!-- <input type="text" class="form-control" placeholder="Dismissal song title" min="1" required
+            #dismissalSongTitle [ngModel]="planner?.dismissalSong.title">
           <input type="text" class="form-control" placeholder="Dismissal song number" min="1" required
-            #dismissalSongHymnNumber="ngModel" [ngModel]="planner?.dismissalSong.hymnNumber">
+            #dismissalSongHymnNumber [ngModel]="planner?.dismissalSong.hymnNumber"> -->
         </div>
+
         <!-- SACRAMENT DATE -->
         <div class="form-group">
           <label for="exampleInputEmail1">Sacrament date</label>
-          <input type="date" class="form-control" placeholder="Enter sacrament meeting date" min="1" required
-            #wardName="ngModel" [ngModel]="planner?.sacramentDate">
+          <input type="date" class="form-control" placeholder="Enter sacrament meeting date" min="1" required #wardName
+            [(ngModel)]="onePlanner.sacramentDate">
         </div>
 
       </div>
-      <div class="modal-footer" *ngIf="editMode === false">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
         <button type="button" class="btn btn-primary" (click)="create({lastName: lastName.value, firstName: firstName.value,
-          memberTitle: memberTitle.value}); hideModal()">Save changes</button>
-      </div>
-      <div class="modal-footer" *ngIf="editMode === true">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="edit({lastName: lastName.value, firstName: firstName.value,
-          memberTitle: memberTitle.value}); hideModal()">Edit changes</button>
+          memberTitle: memberTitle.value}); hideModal()" *ngIf="!editMode">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="edit(); hideModal()" *ngIf="editMode">Save
+          changes</button>
       </div>
     </div>
   </div>

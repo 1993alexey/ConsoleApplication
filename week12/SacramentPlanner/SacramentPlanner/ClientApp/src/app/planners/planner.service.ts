@@ -32,7 +32,7 @@ export class PlannerService {
     }
 
     updatePlanner(planner: Planner): Observable<any> {
-        return this.http.put<Planner>(this.plannersUrl, planner, this.httpOptions)
+        return this.http.put<Planner>(`${this.plannersUrl}/${planner.id}`, planner, this.httpOptions)
             .pipe(catchError(this.handleError<any>()))
     }
 

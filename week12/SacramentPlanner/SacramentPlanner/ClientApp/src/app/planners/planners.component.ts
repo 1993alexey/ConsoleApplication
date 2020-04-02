@@ -57,10 +57,10 @@ export class PlannersComponent implements OnInit {
     this.planners.sort(((a, b) => a.wardName > b.wardName ? 1 : -1))
   }
 
-  create(planner: Planner) {
+  create() {
     this.slepiPirozhok()
 
-    this.plannerService.addPlanner(planner)
+    this.plannerService.addPlanner(this.onePlanner)
       .subscribe(newPlanner => {
         this.planners.push(newPlanner)
         this.sortPlanners()

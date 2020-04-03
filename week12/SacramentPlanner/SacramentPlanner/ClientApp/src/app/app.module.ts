@@ -31,12 +31,8 @@ import { PlannerComponent } from './planners/planner/planner.component';
       { path: '', component: PlannersComponent, pathMatch: 'full' },
       { path: 'hymns', component: HymnsComponent },
       { path: 'members', component: MembersComponent },
-      {
-        path: 'planners', component: PlannersComponent, pathMatch: 'full', children: [
-          { path: 'hello/:id', component: PlannerComponent }
-        ]
-      }
-
+      { path: 'planners', component: PlannersComponent },
+      { path: 'planners/:id', component: PlannerComponent }
     ])
   ],
   providers: [],

@@ -7,6 +7,7 @@ import { Hymn } from '../hymns/hymn.model';
 import { MemberService } from '../members/member.service';
 import { HymnService } from '../hymns/hymn.service';
 import { Talk } from '../talk.model';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -38,7 +39,8 @@ export class PlannersComponent implements OnInit {
   public hymns: Hymn[]
   editMode = false
 
-  constructor(private plannerService: PlannerService, private memberService: MemberService, private hymnService: HymnService) { }
+  constructor(private plannerService: PlannerService, private memberService: MemberService, private hymnService: HymnService,
+    private router: Router) { }
 
   ngOnInit() {
     this.plannerService.getPlanners().subscribe(planners => {
@@ -126,6 +128,7 @@ export class PlannersComponent implements OnInit {
   }
 
   openPlanner(id: string) {
+    this.router.navigate([`planners/${id}`]);
     console.log('Hello')
   }
 }

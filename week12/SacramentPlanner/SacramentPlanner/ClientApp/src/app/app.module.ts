@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { PlannersComponent } from './planners/planners.component';
 import { MembersComponent } from './members/members.component';
 import { HymnsComponent } from './hymns/hymns.component';
+import { PlannerComponent } from './planners/planner/planner.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HymnsComponent } from './hymns/hymns.component';
     HomeComponent,
     PlannersComponent,
     MembersComponent,
-    HymnsComponent
+    HymnsComponent,
+    PlannerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,10 +28,15 @@ import { HymnsComponent } from './hymns/hymns.component';
     FormsModule,
     FontAwesomeModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: PlannersComponent, pathMatch: 'full' },
       { path: 'hymns', component: HymnsComponent },
       { path: 'members', component: MembersComponent },
-      { path: 'planners', component: PlannersComponent },
+      {
+        path: 'planners', component: PlannersComponent, pathMatch: 'full', children: [
+          { path: 'hello/:id', component: PlannerComponent }
+        ]
+      }
+
     ])
   ],
   providers: [],

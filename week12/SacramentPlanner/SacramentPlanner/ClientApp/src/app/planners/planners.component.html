@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let planner of planners" (click)="openPlanner();">
+      <tr *ngFor="let planner of planners" (click)="openPlanner(planner.id);">
         <!-- PRESIDING -->
         <td class="plannerCells">
           <ul>

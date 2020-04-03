@@ -128,7 +128,6 @@ export class PlannersComponent implements OnInit {
   }
 
   openPlanner(id: string) {
-
-    console.log('Hello')
+    this.router.navigate([`planners/${id}`]);
   }
 }

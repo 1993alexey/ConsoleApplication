@@ -1,0 +1,11 @@
+.item-label {
+  font-weight: bold;
+}
+
+.item {
+  margin-bottom: 7px;
+}
+
+.table-responsive {
+  max-width: 600px;
+}

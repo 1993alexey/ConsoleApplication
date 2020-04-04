@@ -1,28 +1,80 @@
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-6">
-          <div class="something">Hello</div>
-        </div>
-        <div class="col-xl-6">
-          <div class="something">world</div>
-        </div>
-      </div>
-    </div>
+<div class="item">
+  <span class="item-label">Ward:</span> {{planner.wardName}}
+</div>
+<div class="item">
+  <div class="form-check-inline">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" [ngModel]="planner.wardBusiness" disabled>Ward Business
+    </label>
+  </div>
+  <div class="form-check-inline">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" [ngModel]="planner.sacramentPassing" disabled>Pass Sacrament
+    </label>
+  </div>
+</div>
+<div class="item">
+  <span class="item-label">Presiding:</span>
+  {{planner.presiding.firstName}} {{planner.presiding.lastName}} {{planner.presiding.memberTitle}}
+</div>
+<div class="item">
+  <span class="item-label">Conducting:</span>
+  {{planner.conducting.firstName}} {{planner.conducting.lastName}} {{planner.conducting.memberTitle}}
+</div>
+<div class="item">
+  <span class="item-label">Opening Hymn:</span>
+  {{planner.openingHymn.hymnNumber}} {{planner.openingHymn.title}}
+</div>
+<div class="item">
+  <span class="item-label">Invocation:</span>
+  {{planner.invocation.firstName}} {{planner.invocation.lastName}} {{planner.invocation.memberTitle}}
+</div>
+<div class="item" *ngIf="planner.sacramentPassing">
+  <span class="item-label">Sacrament Hymn:</span> {{planner.sacramentHymn.hymnNumber}} {{planner.sacramentHymn.title}}
+</div>
+<!-- {{planner.talks}} -->
+<div class="item" *ngIf="planner.talks.length">
+  <span class="item-label">Talks:</span>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Speaker</th>
+          <th>Talk Title</th>
+          <th>Time Limit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let talk of planner.talks">
+          <td>
+            {{talk.speaker.firstName}} {{talk.speaker.lastName}} {{talk.speaker.memberTitle}}
+          </td>
+          <td>{{talk.talkTitle}}</td>
+          <td>{{talk.timeLimit}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
+<div class="item">
+  <span class="item-label">Musical Number:</span>
+  {{planner.musicalNumber.title}} {{planner.musicalNumber.performAfterTalk}}
+</div>
+<div class="item">
+  <span class="item-label">Closing Hymn:</span>
+  {{planner.closingHymn.hymnNumber}} {{planner.closingHymn.title}}
+</div>
+<div class="item">
+  <span class="item-label">Benediction:</span>
+  {{planner.benediction.firstName}} {{planner.benediction.lastName}} {{planner.benediction.memberTitle}}
+</div>
+<div class="item">
+  <span class="item-label">Dismissal Song:</span>
+  {{planner.dismissalSong.hymnNumber}} {{planner.dismissalSong.title}}
+</div>
+<div class="item">
+  <span class="item-label">Sacrament Date:</span> {{planner.sacramentDate  | date: "shortDate"}}
+</div>
 
-    <br><br>{{planner.wardName}}
-    <br><br>{{planner.sacramentPassing}}
-    <br><br>{{planner.wardBusiness}}
-    <br><br>{{planner.presiding.firstName}} {{planner.presiding.lastName}} {{planner.presiding.memberTitle}}
-    <br><br>{{planner.conducting.firstName}} {{planner.conducting.lastName}} {{planner.conducting.memberTitle}}
-    <br><br>{{planner.openingHymn.hymnNumber}} {{planner.openingHymn.title}}
-    <br><br>{{planner.invocation.firstName}} {{planner.invocation.lastName}} {{planner.invocation.memberTitle}}
-    <br><br>{{planner.sacramentHymn.hymnNumber}} {{planner.sacramentHymn.title}}
-
-    <!-- {{planner.talks}} -->
-
-    <br><br>{{planner.musicalNumber.title}} {{planner.musicalNumber.performAfterTalk}}
-    <br><br>{{planner.closingHymn.hymnNumber}} {{planner.closingHymn.title}}
-    <br><br>{{planner.benediction.firstName}} {{planner.benediction.lastName}} {{planner.benediction.memberTitle}}
-    <br><br>{{planner.dismissalSong.hymnNumber}} {{planner.dismissalSong.title}}
-    <br><br>{{planner.sacramentDate  | date: "shortDate"}}
+<button class="btn btn-secondary" (click)="router.navigate(['planners'])">Go Back</button>
